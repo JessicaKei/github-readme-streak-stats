@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/GZHodUG.png" width="100px" alt="GitHub Readme Streak Stats" />
+  <img src="./logo.png" width="100px" alt="GitHub Readme Streak Stats" />
 </div>
 
 # GitHub Readme Streak Stats <a href="https://www.patreon.com/cw/JesKei"><img align="right" alt="Views Counter" src="https://views-counter.vercel.app/badge?pageId=JessicaKei%2Fgithub-readme-streak-stats&leftColor=555555&rightColor=000F2D&label=REPOSITORY%20VIEWS" /></a><a href="https://vercel.com"><img width=123 align="right" alt="Powered by Vercel" src="./assets/powered-by-vercel.svg" /></a>
