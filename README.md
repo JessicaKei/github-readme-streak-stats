@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./logo.png" width="100px" alt="GitHub Readme Streak Stats" />
+  <img src="./assets/logo.png" width="100px" alt="GitHub Readme Streak Stats" />
 </div>
 
 # GitHub Readme Streak Stats <a href="https://www.patreon.com/cw/JesKei"><img align="right" alt="Views Counter" src="https://views-counter.vercel.app/badge?pageId=JessicaKei%2Fgithub-readme-streak-stats&leftColor=555555&rightColor=000F2D&label=REPOSITORY%20VIEWS" /></a><a href="https://vercel.com"><img width=123 align="right" alt="Powered by Vercel" src="./assets/powered-by-vercel.svg" /></a>
@@ -7,7 +7,7 @@
 Self-hosted deployment of GitHub README Streak Stats used for Jessica Kei profile and repositories.  
 
 Based on:  
-[https://github.com/anuraghazra/github-readme-streak-stats](https://github.com/anuraghazra/github-readme-streak-stats)  
+[https://github.com/DenverCoder1/github-readme-streak-stats](https://github.com/DenverCoder1/github-readme-streak-stats)  
 
 See original documentation:  
 [UPSTREAM_README.md](./UPSTREAM_README.md)  
@@ -39,7 +39,7 @@ See original documentation:
 
 ## Public Usage
 
-You can use this deployment to generate GitHub README stats for your own profile or repositories.  
+You can use this deployment to generate GitHub README streak stats for your own profile or repositories.  
 
 Base URL:  
 https://jeskei-github-streak-stats.vercel.app  
@@ -70,18 +70,14 @@ See the original documentation for additional parameters and configuration optio
   ```html
   <div align="center">
     <a href="https://github.com/JessicaKei/github-readme-streak-stats">
-      <img valign="top" height="315px" alt="JesKei's GitHub stats" src="https://jeskei-github-streak-stats.vercel.app/api?username=JessicaKei&theme=deep_ocean&show_icons=true&include_all_commits=true&commits_api=advanced&count_private=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage" />
+      <img valign="top" alt="JesKei's GitHub streak stats" src="https://jeskei-readme-streak-stats.vercel.app?user=JessicaKei&theme=deep_ocean" />
     </a>
   </div>
   ```
 
 <div align="center">
-  <a href="https://github.com/JessicaKei/github-readme-stats">
-    <img valign="top" height="315px" alt="JesKei's GitHub stats" src="https://jeskei-github-stats.vercel.app/api?username=JessicaKei&theme=deep_ocean&show_icons=true&include_all_commits=true&commits_api=advanced&count_private=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage" />
-  </a>
-  
-  <a href="https://github.com/JessicaKei/github-readme-stats">
-    <img valign="top" height="315px" alt="JesKei's top languages" src="https://jeskei-github-stats.vercel.app/api/top-langs?username=JessicaKei&theme=deep_ocean&layout=compact&langs_count=18&size_weight=1&count_weight=0.00001&card_width=330" />
+  <a href="https://github.com/JessicaKei/github-readme-streak-stats">
+    <img valign="top" alt="JesKei's GitHub streak stats" src="https://jeskei-readme-streak-stats.vercel.app?user=JessicaKei&theme=deep_ocean" />
   </a>
 </div>
   
