@@ -119,12 +119,6 @@ function normalizeThemeName(string $theme): string
  */
 function getTheme(?string $themeName, array $themes): array
 {
-    $defaultThemeName = "default";
-
-    if (is_null($themeName)) {
-        return $themes[$defaultThemeName];
-    }
-
     if (array_key_exists($themeName, $themes)) {
         return $themes[$themeName];
     }
@@ -147,7 +141,7 @@ function getTheme(?string $themeName, array $themes): array
         return $themes[$lowerNormalizedThemeName];
     }
 
-    return $themes[$defaultThemeName];
+    return $themes["default"];
 }
 
 /**
@@ -171,7 +165,7 @@ function getRequestedTheme(array $params): array
     $CSS_COLORS = include "colors.php";
 
     // get theme colors, or default colors if theme not found
-    $theme = getTheme($params["theme"], $THEMES);
+    $theme = getTheme($params["theme"] ?? "default", $THEMES);
 
     // personal theme customizations
     $properties = array_keys($theme);
