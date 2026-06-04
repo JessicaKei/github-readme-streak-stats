@@ -404,9 +404,3 @@ a.underline-hover {
     width: 100%;
   }
 }
-
-span.github-btn, 
-iframe[src*="github-btn"] {
-    outline: none !important;
-    box-shadow: none !important;
-}

@@ -104,7 +104,7 @@ function fileModifiedTime(string $filename): int
         <!-- GitHub Star -->
         <a
             class="github-button"
-            href="https://github.com/JessicaKei/github-readme-streak-stats"
+            href="https://github.com/JessicaKei/github-readme-streak-stats/star"
             data-color-scheme="no-preference: light; light: light; dark: dark;"
             data-icon="octicon-star"
             data-size="large"
