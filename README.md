@@ -16,24 +16,9 @@ See original documentation:
 
 ## Fork Features
 
-* Added the ability to display all commits since the account was created, or for a specified time range.  
-  * All the time:  
-    Set the flags to the following values:  
-    `commits_api=advanced`  
-    `include_all_commits=true` - if you also want to display private commits  
-  * Range:  
-    Set the flags to the following values:  
-    `commits_api=advanced`  
-    `commits_year=START_YEAR` - example: `commits_year=2023`  
-    `commits_end_year=END_YEAR` - example: `commits_end_year=2026`  
-    `include_all_commits=true` - if you also want to display private commits  
-* Added custom theme deep_ocean  
-  <a href="https://github.com/JessicaKei/github-readme-stats"><img valign="top" height="315px" alt="JesKei's GitHub stats" src="https://jeskei-github-stats.vercel.app/api?username=JessicaKei&theme=deep_ocean&show_icons=true&include_all_commits=true&commits_api=advanced&count_private=true&show=reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage" /></a> <a href="https://github.com/JessicaKei/github-readme-stats"><img valign="top" height="315px" alt="JesKei's top languages" src="https://jeskei-github-stats.vercel.app/api/top-langs?username=JessicaKei&theme=deep_ocean&layout=compact&langs_count=18&size_weight=1&count_weight=0.00001&card_width=330" /></a>
-
-<br />
-
-> [!NOTE]  
-> Set the `DISABLE_ADVANCED_COMMITS` environment variable to `true` to disable the `advanced` commits API mode globally. Although the advanced mode is highly optimized and fetches all data in a **single GraphQL request**, this toggle is provided as a safeguard to disable the feature if high-traffic instances hit strict GitHub API rate limits. When disabled, it safely falls back to the default behavior.  
+* Added correct support for different types of names for themes.  
+* Added custom theme `deep_ocean`  
+  <a href="https://github.com/JessicaKei/github-readme-streak-stats"><img valign="top" alt="JesKei's GitHub streak stats" src="https://jeskei-readme-streak-stats.vercel.app?user=JessicaKei&theme=deep_ocean" /></a>  
 
 <br />
 
@@ -42,19 +27,19 @@ See original documentation:
 You can use this deployment to generate GitHub README streak stats for your own profile or repositories.  
 
 Base URL:  
-https://jeskei-github-streak-stats.vercel.app  
+https://jeskei-readme-streak-stats.vercel.app/
 
 <br />
 
 **Examples:**  
 
 ```md
-[![GitHub Streak Stats](https://jeskei-github-streak-stats.vercel.app/api?username=YOUR_USERNAME)](https://github.com/JessicaKei/github-readme-streak-stats)
+[![GitHub Streak Stats](https://jeskei-readme-streak-stats.vercel.app/api?username=YOUR_USERNAME)](https://github.com/JessicaKei/github-readme-streak-stats)
 ```
 
 ```html
 <a href="https://github.com/JessicaKei/github-readme-streak-stats">
-  <img alt="GitHub stats" src="https://jeskei-github-streak-stats.vercel.app/api?username=YOUR_USERNAME" />
+  <img alt="GitHub stats" src="https://jeskei-readme-streak-stats.vercel.app/api?username=YOUR_USERNAME" />
 </a>
 ```
 
