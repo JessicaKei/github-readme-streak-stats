@@ -2,7 +2,7 @@
   <img src="./assets/logo.png" width="100px" alt="GitHub Readme Streak Stats" />
 </div>
 
-# GitHub Readme Streak Stats <a href="https://www.patreon.com/cw/JesKei"><img align="right" alt="Views Counter" src="https://views-counter.vercel.app/badge?pageId=JessicaKei%2Fgithub-readme-streak-stats&leftColor=555555&rightColor=000F2D&label=REPOSITORY%20VIEWS" /></a><a href="https://vercel.com"><img width=123 align="right" alt="Powered by Vercel" src="./assets/powered-by-vercel.svg" /></a>
+# GitHub Readme Streak Stats <a href="https://www.patreon.com/JesKei"><img align="right" alt="Views Counter" src="https://views-counter.vercel.app/badge?pageId=JessicaKei%2Fgithub-readme-streak-stats&leftColor=555555&rightColor=000F2D&label=REPOSITORY%20VIEWS" /></a><a href="https://vercel.com"><img width=123 align="right" alt="Powered by Vercel" src="./assets/powered-by-vercel.svg" /></a>
 
 Self-hosted deployment of GitHub README Streak Stats used for Jessica Kei profile and repositories.  
 
@@ -88,4 +88,4 @@ See the original documentation for additional parameters and configuration optio
 ## Support
 
 If this deployment is useful to you, you can support me on Patreon:  
-[https://www.patreon.com/cw/JesKei](https://www.patreon.com/cw/JesKei)  
+[https://www.patreon.com/JesKei](https://www.patreon.com/JesKei)  
