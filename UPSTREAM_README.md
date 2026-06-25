@@ -243,19 +243,19 @@ Vercel is the recommended option for hosting the files since it is **free** and 
 
 1. Click the Deploy button below
 
-[![][hspace]](#) [![Deploy with Vercel](https://i.imgur.com/Mb3VLCi.png)][verceldeploy]
+[![][hspace]](#) [![Deploy with Vercel](./assets/deploy-to-vercel.png)][verceldeploy]
 
 2. Create your repository by filling in a Repository Name and clicking "Create"
 3. Visit [this link](https://github.com/settings/tokens/new?description=GitHub%20Readme%20Streak%20Stats) to create a new Personal Access Token (no scopes required)
 4. Scroll to the bottom and click **"Generate token"**
 5. **Add the token** as a Config Var with the key `TOKEN`:
 
-![vercel environment variables](https://github.com/JessicaKei/github-readme-streak-stats/assets/20955511/17a433d6-0aaa-4c69-9a53-6d4638318fbb)
+![vercel environment variables](./assets/vercel-environment-variables.png)
 
 6. Click **"Deploy"** at the end of the form
 7. Once the app is deployed, click the screenshot of your app or continue to the dashboard to find your domain to use in place of `jeskei-readme-streak-stats.vercel.app`
 
-![deployment](https://github.com/JessicaKei/github-readme-streak-stats/assets/20955511/32092461-5983-4fed-b21b-29be55ed85e8)
+![deployment](./assets/deployment-to-vercel.png)
 
 #### Option 2: Deploy to Vercel manually
 
@@ -273,7 +273,7 @@ Vercel is the recommended option for hosting the files since it is **free** and 
 12. (Optional) You can also set the `WHITELIST` environment variable to restrict which GitHub usernames can be accessed through the service. Provide the usernames as a comma-separated list, for example: `user1,user2,user3`. If the variable is not set, information can be requested for any GitHub user.
 13. To apply the new environment variable(s), you need to redeploy the app. Run `vercel --prod` to deploy the app to production.
 
-![image](https://user-images.githubusercontent.com/20955511/209588756-8bf5b0cd-9aa6-41e8-909c-97bf41e525b3.png)
+![image](./assets/add-a-new-environment-variable-with-the-key-TOKEN.png)
 
 > ⚠️ **Note**
 > To set up automatic Vercel deployments from GitHub, make sure to turn **off** "Include source files outside of the Root Directory" in the General settings and use `vercel` as the production branch in the Git settings.
@@ -294,11 +294,11 @@ Heroku is another great option for hosting the files. All features are supported
 3. Scroll to the bottom and click **"Generate token"**
 4. Click the Deploy button below
 
-[![][hspace]](#) [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)][herokudeploy]
+[![][hspace]](#) [![Deploy to Heroku](./assets/deploy-to-heroku.svg)][herokudeploy]
 
 5. **Add the token** as a Config Var with the key `TOKEN`:
 
-![heroku config variables](https://user-images.githubusercontent.com/20955511/136292022-a8d9b3b5-d7d8-4a5e-a049-8d23b51ce9d7.png)
+![heroku config variables](./assets/heroku-config-variables.png)
 
 6. (Optional) You can also set the `WHITELIST` Config Var to restrict which GitHub usernames can be accessed through the service. Provide the usernames as a comma-separated list, for example: `user1,user2,user3`. If the variable is not set, information can be requested for any GitHub user.
 7. Click **"Deploy App"** at the end of the form
@@ -308,7 +308,7 @@ Heroku is another great option for hosting the files. All features are supported
 
 ### Deploy on your own
 
-You can transfer the files to any webserver using FTP or other means, then refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for installation steps.
+You can transfer the files to any webserver using FTP or other means, then refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for installation steps.
 
 ### 🐳 Docker
 
@@ -353,31 +353,21 @@ Docker is a great option for self-hosting with full control over your environmen
 
 </details>
 
-[hspace]: https://user-images.githubusercontent.com/20955511/136058102-b79570bc-4912-4369-b664-064a0ada8588.png
-[verceldeploy]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FJessicaKei%2Fgithub-readme-streak-stats%2Ftree%2Fvercel&env=TOKEN&envDescription=GitHub%20Personal%20Access%20Token%20(no%20scopes%20required)&envLink=https%3A%2F%2Fgithub.com%2Fsettings%2Ftokens%2Fnew%3Fdescription%3DGitHub%2520Readme%2520Streak%2520Stats&project-name=streak-stats&repository-name=github-readme-streak-stats
-[herokudeploy]: https://heroku.com/deploy?template=https://github.com/JessicaKei/github-readme-streak-stats/tree/main
-
 ## 🤗 Contributing
 
 Contributions are welcome! Feel free to [open an issue](https://github.com/JessicaKei/github-readme-streak-stats/issues/new/choose) or submit a [pull request](https://github.com/JessicaKei/github-readme-streak-stats/compare) if you have a way to improve this project.
 
 Make sure your request is meaningful and you have tested the app locally before submitting a pull request.
 
-Refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for more details on contributing, installing requirements, and running the application.
+Refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for more details on contributing, installing requirements, and running the application.
 
 ## 🙋‍♂️ Support
 
-💙 If you like this project, give it a ⭐ and share it with friends!
-
-<p align="left">
-  <a href="https://www.youtube.com/channel/UCipSxT7a3rn81vGLw9lqRkg?sub_confirmation=1"><img alt="Youtube" title="Youtube" src="https://img.shields.io/badge/-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white"/></a>
-  <a href="https://github.com/sponsors/DenverCoder1"><img alt="Sponsor with Github" title="Sponsor with Github" src="https://img.shields.io/badge/-Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white"/></a>
-</p>
-
-[☕ Buy me a coffee](https://ko-fi.com/jlawrence)
+If this deployment is useful to you, you can support me on Patreon:  
+[https://www.patreon.com/JesKei](https://www.patreon.com/JesKei)  
 
 ---
 
 Made with ❤️ and PHP
 
-<a href="https://heroku.com/"><img alt="Powered by Heroku" title="Powered by Heroku" src="https://img.shields.io/badge/-Powered%20by%20Heroku-6567a5?style=for-the-badge&logo=heroku&logoColor=white"/></a>
+<a href="https://heroku.com/"><img alt="Powered by Heroku" title="Powered by Heroku" src="./assets/powered-by-heroku.svg"/></a>

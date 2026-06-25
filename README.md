@@ -19,6 +19,7 @@ See original documentation:
 * Added correct support for different types of names for themes.  
 * Added custom theme `deep_ocean`  
   <a href="https://github.com/JessicaKei/github-readme-streak-stats"><img valign="top" alt="JesKei's GitHub streak stats" src="https://jeskei-readme-streak-stats.vercel.app?user=JessicaKei&theme=deep_ocean" /></a>  
+* Fixed retrieving statistics on cold startup. The script will now wait for statistics if they aren't in the cache, rather than returning a broken image.  
 
 <br />
 
