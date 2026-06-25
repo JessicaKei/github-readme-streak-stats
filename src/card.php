@@ -107,7 +107,41 @@ function getExcludingDaysText($excludedDays, $localeTranslations, $localeCode)
  */
 function normalizeThemeName(string $theme): string
 {
-    return strtolower(str_replace("_", "-", $theme));
+    return str_replace("_", "-", $theme);
+}
+
+/**
+ * Get a theme with normalization and backward compatibility in mind
+ *
+ * @param ?string $themeName Theme name from URL parameters
+ * @param array $themes List of all available themes from themes.php
+ * @return array Selected or default theme colors
+ */
+function getTheme(?string $themeName, array $themes): array
+{
+    if (array_key_exists($themeName, $themes)) {
+        return $themes[$themeName];
+    }
+
+    $lowerThemeName = strtolower($themeName);
+
+    if (array_key_exists($lowerThemeName, $themes)) {
+        return $themes[$lowerThemeName];
+    }
+
+    $normalizedThemeName = normalizeThemeName($themeName);
+
+    if (array_key_exists($normalizedThemeName, $themes)) {
+        return $themes[$normalizedThemeName];
+    }
+
+    $lowerNormalizedThemeName = strtolower($normalizedThemeName);
+
+    if (array_key_exists($lowerNormalizedThemeName, $themes)) {
+        return $themes[$lowerNormalizedThemeName];
+    }
+
+    return $themes["default"];
 }
 
 /**
@@ -130,11 +164,8 @@ function getRequestedTheme(array $params): array
      */
     $CSS_COLORS = include "colors.php";
 
-    // normalize theme name
-    $selectedTheme = normalizeThemeName($params["theme"] ?? "default");
-
     // get theme colors, or default colors if theme not found
-    $theme = $THEMES[$selectedTheme] ?? $THEMES["default"];
+    $theme = getTheme($params["theme"] ?? "default", $THEMES);
 
     // personal theme customizations
     $properties = array_keys($theme);

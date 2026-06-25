@@ -2160,4 +2160,17 @@ return [
         "dates" => "#C4B28A",
         "excludeDaysLabel" => "#C8C093",
     ],
+    "deep_ocean" => [
+        "background" => "#000F2D",
+        "border" => "#022B8A",
+        "stroke" => "#00A8F2",
+        "ring" => "#01B5FD",
+        "fire" => "#01B5FD",
+        "currStreakNum" => "#C3F5F6",
+        "sideNums" => "#C3F5F6",
+        "currStreakLabel" => "#00A8F2",
+        "sideLabels" => "#00A8F2",
+        "dates" => "#C3F5F6",
+        "excludeDaysLabel" => "#00A8F2",
+    ],
 ];
