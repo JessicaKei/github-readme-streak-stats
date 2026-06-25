@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/GZHodUG.png" width="100px"/>
+  <img src="./assets/logo.png" width="100px"/>
   <h3 align="center">Github Readme Streak Stats</h3>
 </p>
 
@@ -7,13 +7,6 @@
   Display your total contributions, current streak,
   <br/>
   and longest streak on your GitHub profile README
-</p>
-
-<p align="center">
-  <a href="https://github.com/search?q=path%3A*.md+%28streak-stats.demolab.com+OR+git.io%2Fstreak-stats+OR+denvercoder1%2Fgithub-readme-streak-stats+OR+github-readme-streak-stats-eight.vercel.app%29&type=code" alt="Users" title="Repo users">
-    <img src="https://freshidea.com/jonah/app/github-search-results/streak-stats"/></a>
-  <a href="https://discord.gg/fPrdqh3Zfu" alt="Discord" title="Dev Pro Tips Discussion & Support Server">
-    <img src="https://img.shields.io/discord/819650821314052106?color=7289DA&logo=discord&logoColor=white&style=for-the-badge"/></a>
 </p>
 
 ## ⚡ Quick setup
@@ -24,16 +17,16 @@
 2. Replace the value after `?user=` with your GitHub username
 
 ```md
-[![GitHub Streak](https://streak-stats.demolab.com/?user=DenverCoder1)](https://git.io/streak-stats)
+[![GitHub Streak](https://jeskei-readme-streak-stats.vercel.app/?user=JessicaKei)](https://github.com/JessicaKei/github-readme-streak-stats)
 ```
 
 #### Next Steps
 
-- Check out the [Demo Site](https://streak-stats.demolab.com) or [Options](https://github.com/DenverCoder1/github-readme-streak-stats?tab=readme-ov-file#-options) below for available customizations.
+- Check out the [Demo Site](https://jeskei-readme-streak-stats.vercel.app) or [Options](./UPSTREAM_README.md#-options) below for available customizations.
 
-- It is recommended to self-host the project more better reliability. See [Deploying it on your own](https://github.com/DenverCoder1/github-readme-streak-stats?tab=readme-ov-file#-deploying-it-on-your-own) for more details.
+- It is recommended to self-host the project more better reliability. See [Deploying it on your own](./UPSTREAM_README.md#-deploying-it-on-your-own) for more details.
 
-[![][hspace]](#) [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)][herokudeploy] [![Deploy to Vercel](https://i.imgur.com/Mb3VLCi.png)][verceldeploy]
+[![][hspace]](#) [![Deploy to Heroku](./assets/deploy-to-heroku.svg)][herokudeploy] [![Deploy to Vercel](./assets/deploy-to-vercel.png)][verceldeploy]
 
 ### Option 2: GitHub Actions
 
@@ -75,7 +68,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Generate streak stats
-        uses: DenverCoder1/github-readme-streak-stats@main
+        uses: JessicaKei/github-readme-streak-stats@main
         with:
           options: user=${{ github.repository_owner }}&theme=default&disable_animations=true
           path: profile/streak.svg
@@ -95,22 +88,22 @@ jobs:
 Add this to your profile `README.md` file where you want the stats to appear:
 
 ```html
-<a href="https://git.io/streak-stats"><img src="./profile/streak.svg" alt="GitHub Streak" /></a>
+<a href="https://github.com/JessicaKei/github-readme-streak-stats"><img src="./profile/streak.svg" alt="GitHub Streak" /></a>
 ```
 
-If you are using a fork, replace `DenverCoder1` with the account or organization that hosts your fork. Do not put a PAT directly in the workflow file; store it in GitHub Secrets and reference it as `${{ secrets.YOUR_SECRET_NAME }}`.
+If you are using a fork, replace `JessicaKei` with the account or organization that hosts your fork. Do not put a PAT directly in the workflow file; store it in GitHub Secrets and reference it as `${{ secrets.YOUR_SECRET_NAME }}`.
 
 #### Next Steps
 
-- Check out the [Options](https://github.com/DenverCoder1/github-readme-streak-stats?tab=readme-ov-file#-options) below for available customizations.
+- Check out the [Options](./UPSTREAM_README.md#-options) below for available customizations.
 
 ## ⚙ Demo Site
 
 Here you can customize your Streak Stats card with a live preview.
 
-<https://streak-stats.demolab.com>
+<https://jeskei-readme-streak-stats.vercel.app>
 
-[![Demo Site](https://user-images.githubusercontent.com/20955511/114579753-dbac8780-9c86-11eb-97dd-207039f67d20.gif "Demo Site")](http://streak-stats.demolab.com/demo/)
+[![Demo Site](./assets/demo-site-demonstration.gif "Demo Site")](http://jeskei-readme-streak-stats.vercel.app/demo/)
 
 ## 🔧 Options
 
@@ -120,7 +113,7 @@ If the `theme` parameter is specified, any color customizations specified will b
 
 |         Parameter          |                     Details                      |                                              Example                                               |
 | :------------------------: | :----------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-|           `user`           |        GitHub username to show stats for         |                                           `DenverCoder1`                                           |
+|           `user`           |        GitHub username to show stats for         |                                           `JessicaKei`                                           |
 |          `theme`           |     The theme to apply (Default: `default`)      |                          `dark`, `radical`, etc. [🎨➜](./docs/themes.md)                           |
 |       `hide_border`        |  Make the border transparent (Default: `false`)  |                                         `true` or `false`                                          |
 |      `border_radius`       | Set the roundness of the edges (Default: `4.5`)  |                           Number `0` (sharp corners) to `248` (ellipse)                            |
@@ -154,21 +147,21 @@ If the `theme` parameter is specified, any color customizations specified will b
 To enable a theme, append `&theme=` followed by the theme name to the end of the source URL:
 
 ```md
-[![GitHub Streak](https://streak-stats.demolab.com/?user=DenverCoder1&theme=dark)](https://git.io/streak-stats)
+[![GitHub Streak](https://jeskei-readme-streak-stats.vercel.app/?user=JessicaKei&theme=dark)](https://github.com/JessicaKei/github-readme-streak-stats)
 ```
 
 |     Theme      |                            Preview                            |
 | :------------: | :-----------------------------------------------------------: |
-|   `default`    |          ![default](https://i.imgur.com/IaTuYdS.png)          |
-|     `dark`     |           ![dark](https://i.imgur.com/bUrsjlp.png)            |
-| `highcontrast` |       ![highcontrast](https://i.imgur.com/ovrVrTY.png)        |
+|   `default`    |          ![default](./assets/default-theme.png)          |
+|     `dark`     |           ![dark](./assets/dark-theme.png)            |
+| `highcontrast` |       ![highcontrast](./assets/highcontrast-theme.png)        |
 |  More themes!  | **🎨 [See a list of all available themes](./docs/themes.md)** |
 
 **If you have come up with a new theme you'd like to share with others, please see [Issue #32](https://github.com/DenverCoder1/github-readme-streak-stats/issues/32) for more information on how to contribute.**
 
 ### 🗪 Locales
 
-The following are the locales that have labels translated in Streak Stats. The `locale` query parameter accepts any ISO language or locale code, see [here](https://gist.github.com/DenverCoder1/f61147ba26bfcf7c3bf605af7d3382d5) for a list of valid locales. The locale provided will be used for the date format and number format even if translations are not yet available.
+The following are the locales that have labels translated in Streak Stats. The `locale` query parameter accepts any ISO language or locale code, see [here](./assets/locales.md) for a list of valid locales. The locale provided will be used for the date format and number format even if translations are not yet available.
 
 <!-- This section is automatically generated by the `translation-progress.php` script. -->
 <!-- prettier-ignore-start -->
@@ -201,7 +194,7 @@ When the contribution year is equal to the current year, the characters in brack
 ### Example
 
 ```md
-[![GitHub Streak](https://streak-stats.demolab.com/?user=denvercoder1&currStreakNum=2FD3EB&fire=pink&sideLabels=F00&date_format=[Y.]n.j)](https://git.io/streak-stats)
+[![GitHub Streak](https://jeskei-readme-streak-stats.vercel.app/?user=JessicaKei&currStreakNum=2FD3EB&fire=pink&sideLabels=F00&date_format=[Y.]n.j)](https://github.com/JessicaKei/github-readme-streak-stats)
 ```
 
 ## ℹ️ How these stats are calculated
@@ -221,7 +214,7 @@ The current streak is the number of consecutive days ending with the current day
 
 ## 📤 Deploying it on your own
 
-It is preferable to either use [GitHub Actions](https://github.com/DenverCoder1/github-readme-streak-stats?tab=readme-ov-file#option-2-github-actions), or host the files on your own server which takes less than 2 minutes to set up.
+It is preferable to either use [GitHub Actions](./UPSTREAM_README.md#option-2-github-actions), or host the files on your own server which takes less than 2 minutes to set up.
 
 Doing this can lead to better uptime and more control over customization (you can modify the code for your usage).
 
@@ -250,24 +243,24 @@ Vercel is the recommended option for hosting the files since it is **free** and 
 
 1. Click the Deploy button below
 
-[![][hspace]](#) [![Deploy with Vercel](https://i.imgur.com/Mb3VLCi.png)][verceldeploy]
+[![][hspace]](#) [![Deploy with Vercel](./assets/deploy-to-vercel.png)][verceldeploy]
 
 2. Create your repository by filling in a Repository Name and clicking "Create"
 3. Visit [this link](https://github.com/settings/tokens/new?description=GitHub%20Readme%20Streak%20Stats) to create a new Personal Access Token (no scopes required)
 4. Scroll to the bottom and click **"Generate token"**
 5. **Add the token** as a Config Var with the key `TOKEN`:
 
-![vercel environment variables](https://github.com/DenverCoder1/github-readme-streak-stats/assets/20955511/17a433d6-0aaa-4c69-9a53-6d4638318fbb)
+![vercel environment variables](./assets/vercel-environment-variables.png)
 
 6. Click **"Deploy"** at the end of the form
-7. Once the app is deployed, click the screenshot of your app or continue to the dashboard to find your domain to use in place of `streak-stats.demolab.com`
+7. Once the app is deployed, click the screenshot of your app or continue to the dashboard to find your domain to use in place of `jeskei-readme-streak-stats.vercel.app`
 
-![deployment](https://github.com/DenverCoder1/github-readme-streak-stats/assets/20955511/32092461-5983-4fed-b21b-29be55ed85e8)
+![deployment](./assets/deployment-to-vercel.png)
 
 #### Option 2: Deploy to Vercel manually
 
 1. Sign in to **Vercel** or create a new account at <https://vercel.com>
-2. Use the following command to clone the repository: `git clone https://github.com/DenverCoder1/github-readme-streak-stats.git`. If you plan to make changes, you can also fork the repository and clone your fork instead. If you do not have Git installed, you can download it from <https://git-scm.com/downloads>.
+2. Use the following command to clone the repository: `git clone https://github.com/JessicaKei/github-readme-streak-stats.git`. If you plan to make changes, you can also fork the repository and clone your fork instead. If you do not have Git installed, you can download it from <https://git-scm.com/downloads>.
 3. Navigate to the cloned repository's directory using the command `cd github-readme-streak-stats`
 4. Switch to the "vercel" branch using the command `git checkout vercel`
 5. Make sure you have the Vercel CLI (Command Line Interface) installed on your system. If not, you can download it from <https://vercel.com/download>.
@@ -280,7 +273,7 @@ Vercel is the recommended option for hosting the files since it is **free** and 
 12. (Optional) You can also set the `WHITELIST` environment variable to restrict which GitHub usernames can be accessed through the service. Provide the usernames as a comma-separated list, for example: `user1,user2,user3`. If the variable is not set, information can be requested for any GitHub user.
 13. To apply the new environment variable(s), you need to redeploy the app. Run `vercel --prod` to deploy the app to production.
 
-![image](https://user-images.githubusercontent.com/20955511/209588756-8bf5b0cd-9aa6-41e8-909c-97bf41e525b3.png)
+![image](./assets/add-a-new-environment-variable-with-the-key-TOKEN.png)
 
 > ⚠️ **Note**
 > To set up automatic Vercel deployments from GitHub, make sure to turn **off** "Include source files outside of the Root Directory" in the General settings and use `vercel` as the production branch in the Git settings.
@@ -301,21 +294,21 @@ Heroku is another great option for hosting the files. All features are supported
 3. Scroll to the bottom and click **"Generate token"**
 4. Click the Deploy button below
 
-[![][hspace]](#) [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)][herokudeploy]
+[![][hspace]](#) [![Deploy to Heroku](./assets/deploy-to-heroku.svg)][herokudeploy]
 
 5. **Add the token** as a Config Var with the key `TOKEN`:
 
-![heroku config variables](https://user-images.githubusercontent.com/20955511/136292022-a8d9b3b5-d7d8-4a5e-a049-8d23b51ce9d7.png)
+![heroku config variables](./assets/heroku-config-variables.png)
 
 6. (Optional) You can also set the `WHITELIST` Config Var to restrict which GitHub usernames can be accessed through the service. Provide the usernames as a comma-separated list, for example: `user1,user2,user3`. If the variable is not set, information can be requested for any GitHub user.
 7. Click **"Deploy App"** at the end of the form
-8. Once the app is deployed, you can use `<your-app-name>.herokuapp.com` in place of `streak-stats.demolab.com`
+8. Once the app is deployed, you can use `<your-app-name>.herokuapp.com` in place of `jeskei-readme-streak-stats.vercel.app`
 
 </details>
 
 ### Deploy on your own
 
-You can transfer the files to any webserver using FTP or other means, then refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for installation steps.
+You can transfer the files to any webserver using FTP or other means, then refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for installation steps.
 
 ### 🐳 Docker
 
@@ -329,7 +322,7 @@ Docker is a great option for self-hosting with full control over your environmen
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/DenverCoder1/github-readme-streak-stats.git
+   git clone https://github.com/JessicaKei/github-readme-streak-stats.git
    cd github-readme-streak-stats
    ```
 
@@ -360,31 +353,21 @@ Docker is a great option for self-hosting with full control over your environmen
 
 </details>
 
-[hspace]: https://user-images.githubusercontent.com/20955511/136058102-b79570bc-4912-4369-b664-064a0ada8588.png
-[verceldeploy]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDenverCoder1%2Fgithub-readme-streak-stats%2Ftree%2Fvercel&env=TOKEN&envDescription=GitHub%20Personal%20Access%20Token%20(no%20scopes%20required)&envLink=https%3A%2F%2Fgithub.com%2Fsettings%2Ftokens%2Fnew%3Fdescription%3DGitHub%2520Readme%2520Streak%2520Stats&project-name=streak-stats&repository-name=github-readme-streak-stats
-[herokudeploy]: https://heroku.com/deploy?template=https://github.com/DenverCoder1/github-readme-streak-stats/tree/main
-
 ## 🤗 Contributing
 
-Contributions are welcome! Feel free to [open an issue](https://github.com/DenverCoder1/github-readme-streak-stats/issues/new/choose) or submit a [pull request](https://github.com/DenverCoder1/github-readme-streak-stats/compare) if you have a way to improve this project.
+Contributions are welcome! Feel free to [open an issue](https://github.com/JessicaKei/github-readme-streak-stats/issues/new/choose) or submit a [pull request](https://github.com/JessicaKei/github-readme-streak-stats/compare) if you have a way to improve this project.
 
 Make sure your request is meaningful and you have tested the app locally before submitting a pull request.
 
-Refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for more details on contributing, installing requirements, and running the application.
+Refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for more details on contributing, installing requirements, and running the application.
 
 ## 🙋‍♂️ Support
 
-💙 If you like this project, give it a ⭐ and share it with friends!
-
-<p align="left">
-  <a href="https://www.youtube.com/channel/UCipSxT7a3rn81vGLw9lqRkg?sub_confirmation=1"><img alt="Youtube" title="Youtube" src="https://img.shields.io/badge/-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white"/></a>
-  <a href="https://github.com/sponsors/DenverCoder1"><img alt="Sponsor with Github" title="Sponsor with Github" src="https://img.shields.io/badge/-Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white"/></a>
-</p>
-
-[☕ Buy me a coffee](https://ko-fi.com/jlawrence)
+If this deployment is useful to you, you can support me on Patreon:  
+[https://www.patreon.com/JesKei](https://www.patreon.com/JesKei)  
 
 ---
 
 Made with ❤️ and PHP
 
-<a href="https://heroku.com/"><img alt="Powered by Heroku" title="Powered by Heroku" src="https://img.shields.io/badge/-Powered%20by%20Heroku-6567a5?style=for-the-badge&logo=heroku&logoColor=white"/></a>
+<a href="https://heroku.com/"><img alt="Powered by Heroku" title="Powered by Heroku" src="./assets/powered-by-heroku.svg"/></a>
