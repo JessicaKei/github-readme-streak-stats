@@ -1,5 +1,8 @@
 <?php
 
+// Enable buffering at startup
+ob_start();
+
 declare(strict_types=1);
 
 // load functions
@@ -21,12 +24,6 @@ if (!isset($_ENV["TOKEN"])) {
     renderOutput($message, 500);
 }
 
-// set cache to refresh once per day (24 hours)
-$cacheSeconds = CACHE_DURATION;
-header("Expires: " . gmdate("D, d M Y H:i:s", time() + $cacheSeconds) . " GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: public, max-age=$cacheSeconds");
-
 // redirect to demo site if user is not given
 if (!isset($_REQUEST["user"])) {
     header("Location: demo/");
@@ -35,11 +32,28 @@ if (!isset($_REQUEST["user"])) {
 
 try {
     $stats = generateStreakStats($_REQUEST["user"], $_REQUEST);
+    
+    // set cache to refresh once per day (24 hours)
+    $cacheSeconds = CACHE_DURATION;
+    header("Expires: " . gmdate("D, d M Y H:i:s", time() + $cacheSeconds) . " GMT");
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+    header("Cache-Control: public, max-age=$cacheSeconds");
+    
     renderOutput($stats);
+    
 } catch (InvalidArgumentException | AssertionError $error) {
     error_log("Error {$error->getCode()}: {$error->getMessage()}");
     if ($error->getCode() >= 500) {
         error_log($error->getTraceAsString());
     }
+    
+    // If an error occurs, reset the Vercel Edge cache so that it does not remember the broken plate.
+    header("Cache-Control: no-cache, no-store, must-revalidate");
     renderOutput($error->getMessage(), $error->getCode());
 }
+
+// FLUSH AND OUTPUT THE BUFFER AT THE VERY END
+$output = ob_get_clean();
+header("Content-Length: " . strlen($output));
+echo $output;
+exit();
