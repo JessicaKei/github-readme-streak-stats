@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 // Enable buffering at startup
 ob_start();
-
-declare(strict_types=1);
 
 // load functions
 require_once dirname(__DIR__, 1) . "/vendor/autoload.php";
