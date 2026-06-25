@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/GZHodUG.png" width="100px"/>
+  <img src="./assets/logo.png" width="100px"/>
   <h3 align="center">Github Readme Streak Stats</h3>
 </p>
 
@@ -7,13 +7,6 @@
   Display your total contributions, current streak,
   <br/>
   and longest streak on your GitHub profile README
-</p>
-
-<p align="center">
-  <a href="https://github.com/search?q=extension%3Amd+%22github+readme+streak+stats+herokuapp%22&type=Code" alt="Users" title="Repo users">
-    <img src="https://freshidea.com/jonah/app/github-search-results/streak-stats"/></a>
-  <a href="https://discord.gg/fPrdqh3Zfu" alt="Discord" title="Dev Pro Tips Discussion & Support Server">
-    <img src="https://img.shields.io/discord/819650821314052106?color=7289DA&logo=discord&logoColor=white&style=for-the-badge"/></a>
 </p>
 
 ## ⚡ Quick setup
@@ -33,7 +26,7 @@
 
 - It is recommended to self-host the project more better reliability. See [Deploying it on your own](./UPSTREAM_README.md#-deploying-it-on-your-own) for more details.
 
-[![][hspace]](#) [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)][herokudeploy] [![Deploy to Vercel](https://i.imgur.com/Mb3VLCi.png)][verceldeploy]
+[![][hspace]](#) [![Deploy to Heroku](./assets/deploy-to-heroku.svg)][herokudeploy] [![Deploy to Vercel](./assets/deploy-to-vercel.png)][verceldeploy]
 
 ### Option 2: GitHub Actions
 
@@ -110,7 +103,7 @@ Here you can customize your Streak Stats card with a live preview.
 
 <https://jeskei-readme-streak-stats.vercel.app>
 
-[![Demo Site](https://user-images.githubusercontent.com/20955511/114579753-dbac8780-9c86-11eb-97dd-207039f67d20.gif "Demo Site")](http://jeskei-readme-streak-stats.vercel.app/demo/)
+[![Demo Site](./assets/demo-site-demonstration.gif "Demo Site")](http://jeskei-readme-streak-stats.vercel.app/demo/)
 
 ## 🔧 Options
 
@@ -159,9 +152,9 @@ To enable a theme, append `&theme=` followed by the theme name to the end of the
 
 |     Theme      |                            Preview                            |
 | :------------: | :-----------------------------------------------------------: |
-|   `default`    |          ![default](https://i.imgur.com/IaTuYdS.png)          |
-|     `dark`     |           ![dark](https://i.imgur.com/bUrsjlp.png)            |
-| `highcontrast` |       ![highcontrast](https://i.imgur.com/ovrVrTY.png)        |
+|   `default`    |          ![default](./assets/default-theme.png)          |
+|     `dark`     |           ![dark](./assets/dark-theme.png)            |
+| `highcontrast` |       ![highcontrast](./assets/highcontrast-theme.png)        |
 |  More themes!  | **🎨 [See a list of all available themes](./docs/themes.md)** |
 
 **If you have come up with a new theme you'd like to share with others, please see [Issue #32](https://github.com/DenverCoder1/github-readme-streak-stats/issues/32) for more information on how to contribute.**
