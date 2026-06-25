@@ -2,7 +2,7 @@
 
 To enable a theme, append `&theme=` followed by the theme name to the end of your url.
 
-You can also try out and customize these themes on the [Demo Site](https://streak-stats.demolab.com/demo/)!
+You can also try out and customize these themes on the [Demo Site](https://jeskei-readme-streak-stats.vercel.app/demo/)!
 
 Note: Theme names provided are case-insensitive and any use of underscores will be treated the same as hyphens.
 
@@ -97,7 +97,7 @@ Note: Theme names provided are case-insensitive and any use of underscores will 
 |             `sea`             |      ![image](https://user-images.githubusercontent.com/103951737/184303266-0e5f8a25-bfeb-4876-abf1-91a38ca87680.png)      |
 |          `sea-dark`           |      ![image](https://user-images.githubusercontent.com/103951737/184301879-953370eb-e61a-4e0f-abf4-7029c336e8f1.png)      |
 |         `violet-dark`         |      ![image](https://user-images.githubusercontent.com/103951737/184529784-05de7e57-b939-42f7-9852-345fa191c343.png)      |
-|           `horizon`           |       ![image](https://user-images.githubusercontent.com/3828247/184559656-e1f1b290-0a44-45cc-9681-010577386760.png)       |
+|           `horizon`           |      ![image](https://user-images.githubusercontent.com/3828247/184559656-e1f1b290-0a44-45cc-9681-010577386760.png)        |
 |          `material`           |      ![image](https://user-images.githubusercontent.com/20955511/193617994-dfab039d-b111-4a95-a00d-39517d9e40ab.png)       |
 |        `modern-lilac`         |      ![image](https://user-images.githubusercontent.com/20955511/197569406-6ff144c3-1d6e-4500-9f0b-3112a6c62584.png)       |
 |        `modern-lilac2`        |      ![image](https://user-images.githubusercontent.com/20955511/197575977-029fc730-9c7e-4556-be7c-a727a1715fa7.png)       |
@@ -177,7 +177,7 @@ Note: Theme names provided are case-insensitive and any use of underscores will 
 
 ### Can't find the theme you like?
 
-You can now customize your stats card with the interactive [Demo Site](https://streak-stats.demolab.com/demo/) or by customizing the [url parameters](/README.md#-options).
+You can now customize your stats card with the interactive [Demo Site](https://jeskei-readme-streak-stats.vercel.app/demo/) or by customizing the [url parameters](./README.md#-options).
 
 If you would like to share your theme with others, feel free to open an issue/pull request!
 

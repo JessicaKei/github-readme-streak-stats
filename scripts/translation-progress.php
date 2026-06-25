@@ -77,7 +77,7 @@ function progressToBadges(array $progress): string
         if ($i % $per_row === 0) {
             $table .= "<tr>";
         }
-        $line_url = "https://github.com/DenverCoder1/github-readme-streak-stats/blob/main/src/translations.php#L{$data["line_number"]}";
+        $line_url = "https://github.com/JessicaKei/github-readme-streak-stats/blob/main/src/translations.php#L{$data["line_number"]}";
         $table .= "<td><a href=\"{$line_url}\"><code>{$data["locale"]}</code></a> - {$data["locale_name"]}<br /><a href=\"{$line_url}\"><img src=\"https://progress-bar.xyz/{$data["percentage"]}\" alt=\"{$data["locale_name"]} {$data["percentage"]}%\"></a></td>";
         $i++;
         if ($i % $per_row === 0) {
@@ -120,7 +120,7 @@ function updateReadme(string $path, string $start, string $end, string $content)
 $progress = getProgress($GLOBALS["TRANSLATIONS"]);
 $badges = "\n" . progressToBadges($progress);
 $update = updateReadme(
-    __DIR__ . "/../README.md",
+    __DIR__ . "/../UPSTREAM_README.md",
     "<!-- TRANSLATION_PROGRESS_START -->",
     "<!-- TRANSLATION_PROGRESS_END -->",
     $badges,
