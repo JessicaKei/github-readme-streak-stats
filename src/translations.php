@@ -3,7 +3,7 @@
 /**
  * Locales
  * -------
- * For a list of supported locale codes, see https://github.com/JessicaKei/github-readme-streak-stats/blob/vercel/assets/locales.md
+ * For a list of supported locale codes, see https://github.com/JessicaKei/github-readme-streak-stats/blob/main/assets/locales.md
  *
  * Date Format
  * -----------
@@ -16,7 +16,7 @@
  * 8/10/2016        8/10        n/j[/Y]
  * 2016.8.10        8.10        [Y.]n.j
  *
- * For info on valid date_format strings, see https://github.com/JessicaKei/github-readme-streak-stats/blob/vercel/UPSTREAM_README.md#-date-formats
+ * For info on valid date_format strings, see https://github.com/JessicaKei/github-readme-streak-stats/blob/main/UPSTREAM_README.md#-date-formats
  *
  * Right-to-Left Language Support
  * ------------------------------
