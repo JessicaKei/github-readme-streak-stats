@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/logo.png" width="100px"/>
+  <img src="./assets/img/logo.png" width="100px"/>
   <h3 align="center">Github Readme Streak Stats</h3>
 </p>
 
@@ -26,7 +26,7 @@
 
 - It is recommended to self-host the project more better reliability. See [Deploying it on your own](./UPSTREAM_README.md#-deploying-it-on-your-own) for more details.
 
-[![][hspace]](#) [![Deploy to Heroku](./assets/deploy-to-heroku.svg)][herokudeploy] [![Deploy to Vercel](./assets/deploy-to-vercel.png)][verceldeploy]
+[![][hspace]](#) [![Deploy to Heroku](./assets/img/deploy-to-heroku.svg)][herokudeploy] [![Deploy to Vercel](./assets/img/deploy-to-vercel.png)][verceldeploy]
 
 ### Option 2: GitHub Actions
 
@@ -103,7 +103,7 @@ Here you can customize your Streak Stats card with a live preview.
 
 <https://jeskei-readme-streak-stats.vercel.app>
 
-[![Demo Site](./assets/demo-site-demonstration.gif "Demo Site")](http://jeskei-readme-streak-stats.vercel.app/demo/)
+[![Demo Site](./assets/img/demo-site-demonstration.gif "Demo Site")](http://jeskei-readme-streak-stats.vercel.app/demo/)
 
 ## 🔧 Options
 
@@ -152,9 +152,9 @@ To enable a theme, append `&theme=` followed by the theme name to the end of the
 
 |     Theme      |                            Preview                            |
 | :------------: | :-----------------------------------------------------------: |
-|   `default`    |          ![default](./assets/default-theme.png)          |
-|     `dark`     |           ![dark](./assets/dark-theme.png)            |
-| `highcontrast` |       ![highcontrast](./assets/highcontrast-theme.png)        |
+|   `default`    |          ![default](./assets/img/themes/default-theme.png)          |
+|     `dark`     |           ![dark](./assets/img/themes/dark-theme.png)            |
+| `highcontrast` |       ![highcontrast](./assets/img/themes/highcontrast-theme.png)        |
 |  More themes!  | **🎨 [See a list of all available themes](./docs/themes.md)** |
 
 **If you have come up with a new theme you'd like to share with others, please see [Issue #32](https://github.com/DenverCoder1/github-readme-streak-stats/issues/32) for more information on how to contribute.**
@@ -243,19 +243,19 @@ Vercel is the recommended option for hosting the files since it is **free** and 
 
 1. Click the Deploy button below
 
-[![][hspace]](#) [![Deploy with Vercel](./assets/deploy-to-vercel.png)][verceldeploy]
+[![][hspace]](#) [![Deploy with Vercel](./assets/img/deploy-to-vercel.png)][verceldeploy]
 
 2. Create your repository by filling in a Repository Name and clicking "Create"
 3. Visit [this link](https://github.com/settings/tokens/new?description=GitHub%20Readme%20Streak%20Stats) to create a new Personal Access Token (no scopes required)
 4. Scroll to the bottom and click **"Generate token"**
 5. **Add the token** as a Config Var with the key `TOKEN`:
 
-![vercel environment variables](./assets/vercel-environment-variables.png)
+![vercel environment variables](./assets/img/vercel-environment-variables.png)
 
 6. Click **"Deploy"** at the end of the form
 7. Once the app is deployed, click the screenshot of your app or continue to the dashboard to find your domain to use in place of `jeskei-readme-streak-stats.vercel.app`
 
-![deployment](./assets/deployment-to-vercel.png)
+![deployment](./assets/img/deployment-to-vercel.png)
 
 #### Option 2: Deploy to Vercel manually
 
@@ -294,11 +294,11 @@ Heroku is another great option for hosting the files. All features are supported
 3. Scroll to the bottom and click **"Generate token"**
 4. Click the Deploy button below
 
-[![][hspace]](#) [![Deploy to Heroku](./assets/deploy-to-heroku.svg)][herokudeploy]
+[![][hspace]](#) [![Deploy to Heroku](./assets/img/deploy-to-heroku.svg)][herokudeploy]
 
 5. **Add the token** as a Config Var with the key `TOKEN`:
 
-![heroku config variables](./assets/heroku-config-variables.png)
+![heroku config variables](./assets/img/heroku-config-variables.png)
 
 6. (Optional) You can also set the `WHITELIST` Config Var to restrict which GitHub usernames can be accessed through the service. Provide the usernames as a comma-separated list, for example: `user1,user2,user3`. If the variable is not set, information can be requested for any GitHub user.
 7. Click **"Deploy App"** at the end of the form
@@ -370,4 +370,4 @@ If this deployment is useful to you, you can support me on Patreon:
 
 Made with ❤️ and PHP
 
-<a href="https://heroku.com/"><img alt="Powered by Heroku" title="Powered by Heroku" src="./assets/powered-by-heroku.svg"/></a>
+<a href="https://heroku.com/"><img alt="Powered by Heroku" title="Powered by Heroku" src="./assets/img/powered-by-heroku.svg"/></a>

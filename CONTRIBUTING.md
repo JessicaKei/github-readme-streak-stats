@@ -106,7 +106,7 @@ Below you will find the process and workflow used to review and merge your chang
 
 - Take a look at the existing issues or create your **own** issues!
 
-![issues tab](https://user-images.githubusercontent.com/63443481/136185624-24447858-de8d-4b0a-bb6b-2528d9031196.PNG)
+![issues tab](./assets/issues-tab.png)
 
 ### Step 1 : Fork the Project
 
@@ -119,7 +119,7 @@ cd github-readme-streak-stats
 git remote add upstream https://github.com/JessicaKei/github-readme-streak-stats.git
 ```
 
-![fork button](https://user-images.githubusercontent.com/63443481/136185816-0b6770d7-0b00-4951-861a-dd15e3954918.PNG)
+![fork button](./assets/fork-button.png)
 
 - If you have already forked the project, update your copy before working.
 
@@ -173,15 +173,15 @@ git push -u origin Branch_Name
 
 - Here is how your branch will look.
 
-  ![forked branch](https://user-images.githubusercontent.com/63443481/136186235-204f5c7a-1129-44b5-af20-89aa6a68d952.PNG)
+  ![forked branch](./assets/img/forked-branch.png)
 
 ### Step 6 : Pull Request
 
 - Go to your forked repository in your browser and click on "Compare and pull request". Then add a title and description to your pull request that explains your contribution.
 
-<img width="700" alt="compare and pull request" src="https://user-images.githubusercontent.com/63443481/136186304-c0a767ea-1fd2-4b0c-b5a8-3e366ddc06a3.PNG">
+<img width="700" alt="compare and pull request" src="./assets/img/compare-and-pull-request.png">
 
-<img width="882" alt="opening pull request" src="https://user-images.githubusercontent.com/63443481/136186322-bfd5f333-136a-4d2f-8891-e8f97c379ba8.PNG">
+<img width="882" alt="opening pull request" src="./assets/img/opening-pull-request.png">
 
 - Voila! Your Pull Request has been submitted and it's ready to be merged.🥳
 

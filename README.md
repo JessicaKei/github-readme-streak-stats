@@ -1,8 +1,8 @@
 <div align="center">
-  <img src="./assets/logo.png" width="100px" alt="GitHub Readme Streak Stats" />
+  <img src="./assets/img/logo.png" width="100px" alt="GitHub Readme Streak Stats" />
 </div>
 
-# GitHub Readme Streak Stats <a href="https://www.patreon.com/JesKei"><img align="right" alt="Views Counter" src="https://views-counter.vercel.app/badge?pageId=JessicaKei%2Fgithub-readme-streak-stats&leftColor=555555&rightColor=000F2D&label=REPOSITORY%20VIEWS" /></a><a href="https://vercel.com"><img width=123 align="right" alt="Powered by Vercel" src="./assets/powered-by-vercel.svg" /></a>
+# GitHub Readme Streak Stats <a href="https://www.patreon.com/JesKei"><img align="right" alt="Views Counter" src="https://views-counter.vercel.app/badge?pageId=JessicaKei%2Fgithub-readme-streak-stats&leftColor=555555&rightColor=000F2D&label=REPOSITORY%20VIEWS" /></a><a href="https://vercel.com"><img width=123 align="right" alt="Powered by Vercel" src="./assets/img/powered-by-vercel.svg" /></a>
 
 Self-hosted deployment of GitHub README Streak Stats used for Jessica Kei profile and repositories.  
 
@@ -82,7 +82,7 @@ See the original documentation for additional parameters and configuration optio
 > Abusive usage may result in temporary or permanent blocking to protect deployment stability for other users.  
 > If you need unrestricted usage, custom limits, or full control over caching behavior, you should deploy your own instance using the original project documentation.
 > 
-> [![Vercel](./assets/vercel.svg)](https://vercel.com)
+> [![Vercel](./assets/img/vercel.svg)](https://vercel.com)
 
 <br />
 

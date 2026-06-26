@@ -34,14 +34,16 @@ try {
     $stats = generateStreakStats($_REQUEST["user"], $_REQUEST);
     
     // set cache to refresh once per day (24 hours)
-    $cacheSeconds = CACHE_DURATION;
+    //$cacheSeconds = CACHE_DURATION;
+    $cacheSeconds = 0;
     header("Expires: " . gmdate("D, d M Y H:i:s", time() + $cacheSeconds) . " GMT");
     header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
     header("Cache-Control: public, max-age=$cacheSeconds");
     
     renderOutput($stats);
     
-} catch (InvalidArgumentException | AssertionError $error) {
+}/*
+catch (InvalidArgumentException | AssertionError $error) {
     error_log("Error {$error->getCode()}: {$error->getMessage()}");
     if ($error->getCode() >= 500) {
         error_log($error->getTraceAsString());
@@ -50,6 +52,16 @@ try {
     // If an error occurs, reset the Vercel Edge cache so that it does not remember the broken plate.
     header("Cache-Control: no-cache, no-store, must-revalidate");
     renderOutput($error->getMessage(), $error->getCode());
+}*/
+catch (\Throwable $error) {
+    // Ловим абсолютно любую ошибку уровня PHP 8
+    header("Content-Type: text/plain; charset=utf-8");
+    echo "FALAL ERROR IN CODE:\n";
+    echo "Message: " . $error->getMessage() . "\n";
+    echo "File: " . $error->getFile() . "\n";
+    echo "Line: " . $error->getLine() . "\n";
+    echo "Trace:\n" . $error->getTraceAsString();
+    exit();
 }
 
 // FLUSH AND OUTPUT THE BUFFER AT THE VERY END
