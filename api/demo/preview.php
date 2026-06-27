@@ -33,8 +33,8 @@ if ($mode == "weekly") {
         "length" => 13,
     ];
     $demoStats["currentStreak"] = [
-        "start" => getPreviousSunday(date("Y-m-d", strtotime("-15 days"))),
-        "end" => getPreviousSunday(date("Y-m-d")),
+        "start" => getStartOfWeek(date("Y-m-d", strtotime("-15 days"))),
+        "end" => getStartOfWeek(date("Y-m-d")),
         "length" => 3,
     ];
     unset($demoStats["excludedDays"]);

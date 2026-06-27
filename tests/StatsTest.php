@@ -406,8 +406,8 @@ final class StatsTest extends TestCase
     public function testWeeklyStatsMissingThisWeek(): void
     {
         $contributions = [];
-        $thisWeek = getPreviousSunday(date("Y-m-d"));
-        $lastWeek = getPreviousSunday(date("Y-m-d", strtotime("$thisWeek -1 week")));
+        $thisWeek = getStartOfWeek(date("Y-m-d"));
+        $lastWeek = getStartOfWeek(date("Y-m-d", strtotime("$thisWeek -1 week")));
         for ($i = 0; $i < 7; $i++) {
             $date = date("Y-m-d", strtotime("$lastWeek +$i days"));
             $contributions[$date] = 1;
