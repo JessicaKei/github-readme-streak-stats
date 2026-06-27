@@ -1,7 +1,14 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	]
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "editorconfig.editorconfig",
+      "redhat.vscode-yaml",
+      "bmewburn.vscode-intelephense"
+    ]
+  }
 }

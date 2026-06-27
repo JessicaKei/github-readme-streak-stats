@@ -13,10 +13,10 @@
   "version": "1.7.0",
   "homepage": "https://github.com/JessicaKei/github-readme-streak-stats",
   "repositories": [
-      {
-          "type": "vcs",
-          "url": "https://github.com/JessicaKei/github-readme-streak-stats"
-      }
+    {
+      "type": "vcs",
+      "url": "https://github.com/JessicaKei/github-readme-streak-stats"
+    }
   ],
   "support": {
     "issues": "https://github.com/JessicaKei/github-readme-streak-stats/issues",
