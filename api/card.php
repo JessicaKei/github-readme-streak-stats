@@ -3,57 +3,6 @@
 declare(strict_types=1);
 
 /**
- * Convert date from Y-M-D to more human-readable format
- *
- * @param string $dateString String in Y-M-D format
- * @param string|null $format Date format to use, or null to use locale default
- * @param string $locale Locale code
- * @return string Formatted Date string
- */
-function formatDate(string $dateString, string|null $format, string $locale): string
-{
-    $date = new DateTime($dateString);
-    $formatted = "";
-    $patternGenerator = new IntlDatePatternGenerator($locale);
-    // if current year, display only month and day
-    if (date_format($date, "Y") == date("Y")) {
-        if ($format) {
-            // remove brackets and all text within them
-            $formatted = date_format($date, preg_replace("/\[.*?\]/", "", $format));
-        } else {
-            // format without year using locale
-            $pattern = $patternGenerator->getBestPattern("MMM d");
-            $dateFormatter = new IntlDateFormatter(
-                $locale,
-                IntlDateFormatter::MEDIUM,
-                IntlDateFormatter::NONE,
-                pattern: $pattern,
-            );
-            $formatted = $dateFormatter->format($date);
-        }
-    }
-    // otherwise, display month, day, and year
-    else {
-        if ($format) {
-            // remove brackets, but leave text within them
-            $formatted = date_format($date, str_replace(["[", "]"], "", $format));
-        } else {
-            // format with year using locale
-            $pattern = $patternGenerator->getBestPattern("yyyy MMM d");
-            $dateFormatter = new IntlDateFormatter(
-                $locale,
-                IntlDateFormatter::MEDIUM,
-                IntlDateFormatter::NONE,
-                pattern: $pattern,
-            );
-            $formatted = $dateFormatter->format($date);
-        }
-    }
-    // sanitize and return formatted date
-    return htmlspecialchars($formatted);
-}
-
-/**
  * Translate days of the week
  *
  * Takes a list of days (eg. ["Sun", "Mon", "Sat"]) and returns the short abbreviation of the days of the week in another locale
@@ -97,75 +46,6 @@ function getExcludingDaysText($excludedDays, $localeTranslations, $localeCode)
     $separator = $localeTranslations["comma_separator"] ?? ", ";
     $daysCommaSeparated = implode($separator, translateDays($excludedDays, $localeCode));
     return str_replace("{days}", $daysCommaSeparated, $localeTranslations["Excluding {days}"]);
-}
-
-/**
- * Wraps a string to a given number of characters
- *
- * Similar to `wordwrap()`, but uses regex and does not break with certain non-ascii characters
- *
- * @param string $string The input string
- * @param int $width The number of characters at which the string will be wrapped
- * @param string $break The line is broken using the optional `break` parameter
- * @param bool $cut_long_words If the `cut_long_words` parameter is set to true, the string is
- *              the string is always wrapped at or before the specified width. So if you have
- *              a word that is larger than the given width, it is broken apart.
- *              When false the function does not split the word even if the width is smaller
- *              than the word width.
- * @return string The given string wrapped at the specified length
- */
-function utf8WordWrap(string $string, int $width = 75, string $break = "\n", bool $cut_long_words = false): string
-{
-    // match anything 1 to $width chars long followed by whitespace or EOS
-    $string = preg_replace("/(.{1,$width})(?:\s|$)/uS", "$1$break", $string);
-    // split words that are too long after being broken up
-    if ($cut_long_words) {
-        $string = preg_replace("/(\S{" . $width . "})(?=\S)/u", "$1$break", $string);
-    }
-    // trim any trailing line breaks
-    return rtrim($string, $break);
-}
-
-/**
- * Get the length of a string with utf8 characters
- *
- * Similar to `strlen()`, but uses regex and does not break with certain non-ascii characters
- *
- * @param string $string The input string
- * @return int The length of the string
- */
-function utf8Strlen(string $string): int
-{
-    return preg_match_all("/./us", $string, $matches);
-}
-
-/**
- * Split lines of text using <tspan> elements if it contains a newline or exceeds a maximum number of characters
- *
- * @param string $text Text to split
- * @param int $maxChars Maximum number of characters per line
- * @param int $line1Offset Offset for the first line
- * @return string Original text if one line, or split text with <tspan> elements
- */
-function splitLines(string $text, int $maxChars, int $line1Offset): string
-{
-    // if too many characters, insert \n before a " " or "-" if possible
-    if ($maxChars > 0 && utf8Strlen($text) > $maxChars && strpos($text, "\n") === false) {
-        // prefer splitting at " - " if possible
-        if (strpos($text, " - ") !== false) {
-            $text = str_replace(" - ", "\n- ", $text);
-        }
-        // otherwise, use word wrap to split at spaces
-        else {
-            $text = utf8WordWrap($text, $maxChars, "\n", true);
-        }
-    }
-    $text = htmlspecialchars($text);
-    return preg_replace(
-        "/^(.*)\n(.*)/",
-        "<tspan x='0' dy='{$line1Offset}'>$1</tspan><tspan x='0' dy='16'>$2</tspan>",
-        $text,
-    );
 }
 
 /**
