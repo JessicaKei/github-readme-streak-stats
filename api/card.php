@@ -169,60 +169,6 @@ function splitLines(string $text, int $maxChars, int $line1Offset): string
 }
 
 /**
- * Normalize a locale code
- *
- * @param string $localeCode Locale code
- * @return string Normalized locale code
- */
-function normalizeLocaleCode(string $localeCode): string
-{
-    preg_match("/^([a-z]{2,3})(?:[_-]([a-z]{4}))?(?:[_-]([0-9]{3}|[a-z]{2}))?$/i", $localeCode, $matches);
-    if (empty($matches)) {
-        return "en";
-    }
-    $language = $matches[1];
-    $script = $matches[2] ?? "";
-    $region = $matches[3] ?? "";
-    // convert language to lowercase
-    $language = strtolower($language);
-    // convert script to title case
-    $script = ucfirst(strtolower($script));
-    // convert region to uppercase
-    $region = strtoupper($region);
-    // combine language, script, and region using underscores
-    return implode("_", array_filter([$language, $script, $region]));
-}
-
-/**
- * Get the translations for a locale code after normalizing it
- *
- * @param string $localeCode Locale code
- * @return array Translations for the locale code
- */
-function getTranslations(string $localeCode): array
-{
-    // normalize locale code
-    $localeCode = normalizeLocaleCode($localeCode);
-    // get the labels from the translations file
-    $translations = include "translations.php";
-    // if the locale does not exist, try without the script and region
-    if (!isset($translations[$localeCode])) {
-        $localeCode = explode("_", $localeCode)[0];
-    }
-    // get the translations for the locale or empty array if it does not exist
-    $localeTranslations = $translations[$localeCode] ?? [];
-    // if the locale returned is a string, it is an alias for another locale
-    if (is_string($localeTranslations)) {
-        // get the translations for the alias
-        $localeTranslations = $translations[$localeTranslations];
-    }
-    // fill in missing translations with English
-    $localeTranslations += $translations["en"];
-    // return the translations
-    return $localeTranslations;
-}
-
-/**
  * Get the card width from params taking into account minimum and default values
  *
  * @param array<string,string> $params Request parameters
