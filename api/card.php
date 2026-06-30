@@ -49,33 +49,6 @@ function getExcludingDaysText($excludedDays, $localeTranslations, $localeCode)
 }
 
 /**
- * Get the card width from params taking into account minimum and default values
- *
- * @param array<string,string> $params Request parameters
- * @param int $numColumns Number of columns in the card
- * @return int Card width
- */
-function getCardWidth(array $params, int $numColumns = 3): int
-{
-    $defaultWidth = 495;
-    $minimumWidth = 100 * $numColumns;
-    return max($minimumWidth, intval($params["card_width"] ?? $defaultWidth));
-}
-
-/**
- * Get the card height from params taking into account minimum and default values
- *
- * @param array<string,string> $params Request parameters
- * @return int Card width
- */
-function getCardHeight(array $params): int
-{
-    $defaultHeight = 195;
-    $minimumHeight = 170;
-    return max($minimumHeight, intval($params["card_height"] ?? $defaultHeight));
-}
-
-/**
  * Generate SVG output for a stats array
  *
  * @param array<string,mixed> $stats Streak stats
