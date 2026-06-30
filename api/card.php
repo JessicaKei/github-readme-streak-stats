@@ -76,29 +76,6 @@ function getCardHeight(array $params): int
 }
 
 /**
- * Format number using locale and short number if requested
- *
- * @param float $num The number to format
- * @param string $localeCode Locale code
- * @param bool $useShortNumbers Whether to use short numbers
- * @return string The formatted number
- */
-function formatNumber(float $num, string $localeCode, bool $useShortNumbers): string
-{
-    $numFormatter = new NumberFormatter($localeCode, NumberFormatter::DECIMAL);
-    $suffix = "";
-    if ($useShortNumbers) {
-        $units = ["", "K", "M", "B", "T"];
-        for ($i = 0; $num >= 1000; $i++) {
-            $num /= 1000;
-        }
-        $suffix = $units[$i];
-        $num = round($num, 1);
-    }
-    return $numFormatter->format($num) . $suffix;
-}
-
-/**
  * Generate SVG output for a stats array
  *
  * @param array<string,mixed> $stats Streak stats

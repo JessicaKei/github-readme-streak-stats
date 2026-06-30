@@ -194,7 +194,7 @@ function formatLocaleDate(DateTime $date, string $locale, bool $isCurrentYear, s
  * @param string $dateString Date string in standard Y-M-D format.
  * @param string|null $format Custom date format string containing bracket instructions, or null.
  * @param string $locale Locale code identifier (e.g., "en" or "fr").
- * 
+ *
  * @return string Localized and escaped date string.
  */
 function formatDate(string $dateString, ?string $format, string $locale): string
@@ -207,4 +207,51 @@ function formatDate(string $dateString, ?string $format, string $locale): string
     }
 
     return formatLocaleDate($date, $locale, $isCurrentYear, $dateString);
+}
+
+
+/**
+ * Format a numeric value into a localized string with optional shorthand notation (K, M, B).
+ *
+ * @param float $num The raw numeric value to format.
+ * @param string $localeCode Locale identifier token string (e.g., "en" or "de").
+ * @param bool $useShortNumbers True to activate modern short suffixes (e.g., 1.5K), false for flat strings.
+ *
+ * @return string Strictly formatted and localized number string.
+ */
+function formatNumber(float $num, string $localeCode, bool $useShortNumbers): string
+{
+    /** @var array<string, NumberFormatter> $cachedFormatters */
+    static $cachedFormatters = [];
+
+    if (!isset($cachedFormatters[$localeCode])) {
+        $cachedFormatters[$localeCode] = new NumberFormatter($localeCode, NumberFormatter::DECIMAL);
+    }
+
+    $numFormatter = $cachedFormatters[$localeCode];
+    $suffix = "";
+
+    if ($useShortNumbers && $num >= 1000.0 && is_finite($num)) {
+        /** @var array<int, string> $units */
+        static $units = ["", "K", "M", "B", "T"];
+
+        /** @var int $maxIndex */
+        static $maxIndex = 4;
+
+        $index = (int)floor(log10($num) / 3);
+        $index = min($index, $maxIndex);
+
+        $num /= 1000 ** $index;
+        $num = round($num, 1);
+        $suffix = $units[$index];
+    }
+
+    $formattedValue = $numFormatter->format($num);
+
+    $prefix = $formattedValue !== false
+        ? $formattedValue
+        : (string)$num
+    ;
+
+    return $prefix . $suffix;
 }
