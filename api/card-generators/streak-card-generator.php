@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 // Mount core independent infrastructural tools
 require_once __DIR__ . "/../utils.php";
-require_once __DIR__ . "/../theme-manager.php";
 require_once __DIR__ . "/../translation-manager.php";
 
 
@@ -182,7 +181,7 @@ function getExcludingDaysText(array $excludedDays, array $localeTranslations, st
  */
 function generateCard(array $stats, ?array $params = null): string
 {
-    $params = $params ?? $_REQUEST;
+    $params = resolveParams($params);
 
     $showTotalContributions = !parseBool("hide_total_contributions", $params);
     $showCurrentStreak = !parseBool("hide_current_streak", $params);
@@ -194,18 +193,12 @@ function generateCard(array $stats, ?array $params = null): string
         throw new InvalidArgumentException("All card columns are hidden. Please enable at least one column.", 400);
     }
 
-    $theme = getRequestedTheme($params);
+    $commonData = getCommonCardData($params, $numColumns);
+
+    extract($commonData);
 
     $localeCode = $params["locale"] ?? "en";
     $localeTranslations = getTranslations($localeCode);
-
-    $borderRadius = $params["border_radius"] ?? 4.5;
-
-    $cardWidth = getCardWidth($params, $numColumns);
-    $cardHeight = getCardHeight($params);
-
-    $rectWidth = $cardWidth - 1;
-    $rectHeight = $cardHeight - 1;
 
     $columnWidth = $cardWidth / $numColumns;
     $barOffsets = [];
