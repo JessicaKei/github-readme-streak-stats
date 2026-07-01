@@ -19,68 +19,6 @@ function removeAnimations(string $svg): string
 }
 
 /**
- * Convert a color from hex 3/4/6/8 digits to hex 6 digits and opacity (0-1)
- *
- * @param string $color The color to convert
- * @return array<string, string> The converted color
- */
-function convertHexColor(string $color): array
-{
-    $color = preg_replace("/[^0-9a-fA-F]/", "", $color);
-
-    // double each character if the color is in 3/4 digit format
-    if (strlen($color) === 3) {
-        $chars = str_split($color);
-        $color = "{$chars[0]}{$chars[0]}{$chars[1]}{$chars[1]}{$chars[2]}{$chars[2]}";
-    } elseif (strlen($color) === 4) {
-        $chars = str_split($color);
-        $color = "{$chars[0]}{$chars[0]}{$chars[1]}{$chars[1]}{$chars[2]}{$chars[2]}{$chars[3]}{$chars[3]}";
-    }
-
-    // convert to 6 digit hex and opacity
-    if (strlen($color) === 6) {
-        return [
-            "color" => "#{$color}",
-            "opacity" => 1,
-        ];
-    } elseif (strlen($color) === 8) {
-        return [
-            "color" => "#" . substr($color, 0, 6),
-            "opacity" => hexdec(substr($color, 6, 2)) / 255,
-        ];
-    }
-    throw new AssertionError("Invalid color: " . $color);
-}
-
-/**
- * Convert transparent hex colors (4/8 digits) in an SVG to hex 6 digits and corresponding opacity attribute (0-1)
- *
- * @param string $svg The SVG for the card as a string
- * @return string The SVG with converted colors
- */
-function convertHexColors(string $svg): string
-{
-    // convert "transparent" to "#0000"
-    $svg = preg_replace("/(fill|stroke)=['\"]transparent['\"]/m", '\1="#0000"', $svg);
-
-    // convert hex colors to 6 digits and corresponding opacity attribute
-    $svg = preg_replace_callback(
-        "/(fill|stroke|stop-color)=['\"]#([0-9a-fA-F]{4}|[0-9a-fA-F]{8})['\"]/m",
-        function ($matches) {
-            $attribute = $matches[1];
-            $opacityAttribute = $attribute === "stop-color" ? "stop-opacity" : "{$attribute}-opacity";
-            $result = convertHexColor($matches[2]);
-            $color = $result["color"];
-            $opacity = $result["opacity"];
-            return "{$attribute}='{$color}' {$opacityAttribute}='{$opacity}'";
-        },
-        $svg,
-    );
-
-    return $svg;
-}
-
-/**
  * Converts an SVG card to a PNG image
  *
  * @param string $svg The SVG for the card as a string
@@ -147,9 +85,6 @@ function generateOutput(string|array $output, array $params = null, int $errorCo
 
     // generate SVG card
     $svg = gettype($output) === "string" ? generateErrorCard($output, $params) : generateCard($output, $params);
-
-    // some renderers such as inkscape doesn't support transparent colors in hex format, so we need to convert them
-    $svg = convertHexColors($svg);
 
     // output PNG card
     if ($requestedType === "png") {
