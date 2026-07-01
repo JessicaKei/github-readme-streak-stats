@@ -14,26 +14,41 @@ function convertSvgToPng(string $svg, int $cardWidth, int $cardHeight): string
     // trim off all whitespaces to make it a valid SVG string
     $svg = trim($svg);
 
-    // replace newlines with spaces
-    $svg = str_replace("\n", " ", $svg);
-
-    // escape svg for shell
-    $svg = escapeshellarg($svg);
+    // We describe the stream descriptors (0 - stdin, 1 - stdout, 2 - stderr)
+    $descriptors = [
+        0 => ["pipe", "r"], // We will write SVG to stdin
+        1 => ["pipe", "w"], // We will read PNG from stdout
+        2 => ["pipe", "w"]  // We will read errors from stderr
+    ];
 
     // `--pipe`: read input from pipe (stdin)
     // `--export-filename -`: write output to stdout
     // `-w 495 -h 195`: set width and height of the output image
     // `--export-type png`: set the output format to PNG
-    $cmd = "echo {$svg} | inkscape --pipe --export-filename - -w {$cardWidth} -h {$cardHeight} --export-type png";
+    $cmd = "inkscape --pipe --export-filename - -w {$cardWidth} -h {$cardHeight} --export-type png";
 
-    // convert svg to png
-    $png = shell_exec($cmd); // skipcq: PHP-A1009
+    $process = proc_open($cmd, $descriptors, $pipes);
 
-    // check if the conversion was successful
-    if (empty($png)) {
-        // `2>&1`: redirect stderr to stdout
-        $error = shell_exec("$cmd 2>&1"); // skipcq: PHP-A1009
-        throw new InvalidArgumentException("Failed to convert SVG to PNG: {$error}", 500);
+    if (!is_resource($process)) {
+        throw new InvalidArgumentException("Failed to initialize system Inkscape process interface.", 500);
+    }
+
+    // We directly inject raw SVG with all its line breaks into the Inkscape stream.
+    fwrite($pipes[0], $svg);
+    fclose($pipes[0]);
+
+    // Extract the finished binary PNG from the output stream.
+    $png = stream_get_contents($pipes[1]);
+    fclose($pipes[1]);
+
+    // Reading possible error logs
+    $error = stream_get_contents($pipes[2]);
+    fclose($pipes[2]);
+
+    $returnCode = proc_close($process);
+
+    if ($returnCode !== 0 || empty($png)) {
+        throw new InvalidArgumentException("Failed to convert SVG to PNG via proc_open: {$error}", 500);
     }
 
     // return the generated png
