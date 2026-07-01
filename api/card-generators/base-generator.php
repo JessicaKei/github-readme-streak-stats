@@ -47,7 +47,8 @@ function getCardHeight(array $params): int
  *     cardHeight: int,
  *     rectWidth: int,
  *     rectHeight: int,
- *     heightOffset: float|int
+ *     heightOffset: float|int,
+ *     disableAnimations: bool
  * } Cleaned core layout metadata configuration vector.
  */
 function getCommonCardData(?array $params, int $numColumns = 3): array
@@ -60,6 +61,8 @@ function getCommonCardData(?array $params, int $numColumns = 3): array
     $cardWidth = getCardWidth($params, $numColumns);
     $cardHeight = getCardHeight($params);
 
+    $disableAnimations = parseBool("disable_animations", $params);
+
     return [
         "params" => $params,
         "theme" => $theme,
@@ -69,5 +72,6 @@ function getCommonCardData(?array $params, int $numColumns = 3): array
         "rectWidth" => $cardWidth - 1,
         "rectHeight" => $cardHeight - 1,
         "heightOffset" => ($cardHeight - 195) / 2,
+        "disableAnimations" => $disableAnimations
     ];
 }

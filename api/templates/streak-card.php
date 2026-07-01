@@ -22,6 +22,8 @@
  * @var int $rectHeight Height of the inner background rectangle (cardHeight - 1).
  * @var string $direction Text layout directionality ("ltr" or "rtl").
  *
+ * @var bool $disableAnimations Flag indicating whether animations are disabled.
+ *
  * @var array<int> $barOffsets X coordinates for the column separator lines.
  * @var array<int> $barHeightOffsets Y start and end coordinates for the lines.
  *
@@ -51,18 +53,20 @@
     height='<?= $cardHeight ?>px'
     direction='<?= $direction ?>'
 >
-    <style>
-        @keyframes currstreak {
-            0% { font-size: 3px; opacity: 0.2; }
-            80% { font-size: 34px; opacity: 1; }
-            100% { font-size: 28px; opacity: 1; }
-        }
+    <?php if (!$disableAnimations): ?>
+        <style>
+            @keyframes currstreak {
+                0% { font-size: 3px; opacity: 0.2; }
+                80% { font-size: 34px; opacity: 1; }
+                100% { font-size: 28px; opacity: 1; }
+            }
 
-        @keyframes fadein {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-    </style>
+            @keyframes fadein {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+            }
+        </style>
+    <?php endif; ?>
 
     <defs>
         <clipPath id='outer_rectangle'>
@@ -145,7 +149,7 @@
                     font-weight='700'
                     font-size='28px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 0.6s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.6s'<?php endif; ?>
                 >
                     <?= $totalContributions ?>
                 </text>
@@ -165,7 +169,7 @@
                     font-weight='400'
                     font-size='14px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 0.7s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.7s'<?php endif; ?>
                 >
                     <?= $cardLabels["totalContributionsText"] ?>
                 </text>
@@ -185,7 +189,7 @@
                     font-weight='400'
                     font-size='12px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 0.8s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.8s'<?php endif; ?>
                 >
                     <?= $cardRanges["totalContributionsRange"] ?>
                 </text>
@@ -207,7 +211,7 @@
                     font-weight='700'
                     font-size='14px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 0.9s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.9s'<?php endif; ?>
                 >
                     <?= $cardLabels["currentStreakText"] ?>
                 </text>
@@ -227,7 +231,7 @@
                     font-weight='400'
                     font-size='12px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 0.9s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.9s'<?php endif; ?>
                 >
                     <?= $cardRanges["currentStreakRange"] ?>
                 </text>
@@ -243,7 +247,7 @@
                     stroke='<?= $theme["ring"] ?>'
                     stroke-opacity='<?= $theme["ringOpacity"] ?>'
                     stroke-width='5'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 0.4s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.4s'<?php endif; ?>
                 >
                 </circle>
             </g>
@@ -252,7 +256,7 @@
             <g
                 transform='translate(<?= $currentStreakOffset ?>, <?= $currentStreakHeightOffset[4] ?>)'
                 stroke-opacity='0'
-                style='opacity: 0; animation: fadein 0.5s linear forwards 0.6s'
+                <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.6s'<?php endif; ?>
             >
                 <path d='M -12 -0.5 L 15 -0.5 L 15 23.5 L -12 23.5 L -12 -0.5 Z' fill='none'/>
 
@@ -296,7 +300,11 @@
                     font-weight='700'
                     font-size='28px'
                     font-style='normal'
-                    style='animation: currstreak 0.6s linear forwards'
+                    <?php if (!$disableAnimations): ?>
+                        style='animation: currstreak 0.6s linear forwards'
+                    <?php else: ?>
+                        font-size='28px'
+                    <?php endif; ?>
                 >
                     <?= $currentStreak ?>
                 </text>
@@ -318,7 +326,7 @@
                     font-weight='700'
                     font-size='28px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 1.2s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 1.2s'<?php endif; ?>
                 >
                     <?= $longestStreak ?>
                 </text>
@@ -338,7 +346,7 @@
                     font-weight='400'
                     font-size='14px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 1.3s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 1.3s'<?php endif; ?>
                 >
                     <?= $cardLabels["longestStreakText"] ?>
                 </text>
@@ -358,7 +366,7 @@
                     font-weight='400'
                     font-size='12px'
                     font-style='normal'
-                    style='opacity: 0; animation: fadein 0.5s linear forwards 1.4s'
+                    <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 1.4s'<?php endif; ?>
                 >
                     <?= $cardRanges["longestStreakRange"] ?>
                 </text>
@@ -379,7 +387,7 @@
                         font-weight='400'
                         font-size='10px'
                         font-style='normal'
-                        style='opacity: 0; animation: fadein 0.5s linear forwards 0.9s'
+                        <?php if (!$disableAnimations): ?>style='opacity: 0; animation: fadein 0.5s linear forwards 0.9s'<?php endif; ?>
                     >
                         * <?= htmlspecialchars($excludingDaysText) ?>
                     </text>

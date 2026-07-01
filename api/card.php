@@ -3,22 +3,6 @@
 declare(strict_types=1);
 
 /**
- * Remove animations from SVG
- *
- * @param string $svg The SVG for the card as a string
- * @return string The SVG without animations
- */
-function removeAnimations(string $svg): string
-{
-    $svg = preg_replace("/(<style>\X*?<\/style>)/m", "", $svg);
-    $svg = preg_replace("/(opacity: 0;)/m", "opacity: 1;", $svg);
-    $svg = preg_replace("/(animation: fadein[^;'\"]+)/m", "opacity: 1;", $svg);
-    $svg = preg_replace("/(animation: currstreak[^;'\"]+)/m", "font-size: 28px;", $svg);
-    $svg = preg_replace("/<a \X*?>(\X*?)<\/a>/m", '\1', $svg);
-    return $svg;
-}
-
-/**
  * Converts an SVG card to a PNG image
  *
  * @param string $svg The SVG for the card as a string
@@ -29,9 +13,6 @@ function convertSvgToPng(string $svg, int $cardWidth, int $cardHeight): string
 {
     // trim off all whitespaces to make it a valid SVG string
     $svg = trim($svg);
-
-    // remove style and animations
-    $svg = removeAnimations($svg);
 
     // replace newlines with spaces
     $svg = str_replace("\n", " ", $svg);
@@ -81,6 +62,9 @@ function generateOutput(string|array $output, array $params = null, int $errorCo
             "contentType" => "application/json",
             "body" => json_encode($data),
         ];
+
+    if ($requestedType === "png") {
+        $params["disable_animations"] = "true";
     }
 
     // generate SVG card
@@ -104,11 +88,6 @@ function generateOutput(string|array $output, array $params = null, int $errorCo
                 "body" => generateErrorCard($e->getMessage(), $params),
             ];
         }
-    }
-
-    // remove animations if disable_animations is set
-    if (isset($params["disable_animations"]) && $params["disable_animations"] == "true") {
-        $svg = removeAnimations($svg);
     }
 
     // output SVG card

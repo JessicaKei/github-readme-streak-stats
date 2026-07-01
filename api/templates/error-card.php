@@ -12,6 +12,7 @@
  * @var float|int $heightOffset Vertical positioning offset based on dynamic height.
  * @var float|int $errorLabelOffset Vertical Y coordinate for the error text label.
  * @var string $message The escaped raw error message to display.
+ * @var bool $disableAnimations Flag indicating whether animations are disabled.
  */
 ?>
 <svg
@@ -22,12 +23,14 @@
     width='<?= $cardWidth ?>px'
     height='<?= $cardHeight ?>px'
 >
-    <style>
-        a {
-            fill: <?= $theme["dates"] ?>;
-            fill-opacity: <?= $theme["datesOpacity"] ?>;
-        }
-    </style>
+    <?php if (!$disableAnimations): ?>
+        <style>
+            a {
+                fill: <?= $theme["dates"] ?>;
+                fill-opacity: <?= $theme["datesOpacity"] ?>;
+            }
+        </style>
+    <?php endif; ?>
 
     <defs>
         <clipPath id='outer_rectangle'>
@@ -69,7 +72,11 @@
                     font-size='14px'
                     font-style='normal'
                 >
-                    <?= $message ?>
+                    <?php if ($disableAnimations): ?>
+                        <?= $message ?>
+                    <?php else: ?>
+                        <a href="#"><?= $message ?></a>
+                    <?php endif; ?>
                 </text>
             </g>
 
