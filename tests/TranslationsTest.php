@@ -7,6 +7,9 @@ use PHPUnit\Framework\TestCase;
 // load functions
 require_once dirname(__DIR__, 1) . "/vendor/autoload.php";
 
+// Mount core independent infrastructural tools
+require_once __DIR__ . "/../api/translation-manager.php";
+
 final class TranslationsTest extends TestCase
 {
     /**

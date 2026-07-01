@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/card-generators/streak-card-generator.php";
+require_once __DIR__ . "/card-generators/error-card-generator.php";
+require_once __DIR__ . "/utils.php";
+
 /**
  * Converts an SVG card to a PNG image
  *
@@ -11,7 +15,6 @@ declare(strict_types=1);
  */
 function convertSvgToPng(string $svg, int $cardWidth, int $cardHeight): string
 {
-    // trim off all whitespaces to make it a valid SVG string
     $svg = trim($svg);
 
     // We describe the stream descriptors (0 - stdin, 1 - stdout, 2 - stderr)
@@ -51,79 +54,203 @@ function convertSvgToPng(string $svg, int $cardWidth, int $cardHeight): string
     return $png;
 }
 
+
 /**
- * Return headers and response based on type
+ * Wrap raw data blocks into a standardized JSON response envelope.
  *
- * @param string|array $output The stats (array) or error message (string) to display
- * @param array<string,string>|NULL $params Request parameters
- * @param int $errorCode The HTTP error code (used for JSON responses)
- * @return array The Content-Type header and the response body, and status code in case of an error
+ * @param array $data The statistics dataset array or raw exception descriptor mappings.
+ * @param int $code Target application or HTTP execution logic status marker (0 maps to 200).
+ *
+ * @return array{contentType: string, status: int, body: string} Configured JSON response descriptor.
  */
-function generateOutput(string|array $output, array $params = null, int $errorCode = 200): array
+function buildJsonResponse(array $data, int $code = 0): array
 {
-    $params = $params ?? $_REQUEST;
+    return [
+        "contentType" => "application/json",
+        "status" => $code ?: 200,
+        "body" => json_encode($data),
+    ];
+}
 
-    $requestedType = $params["type"] ?? "svg";
 
-    // output JSON data
+/**
+ * Wrap standalone vector markup into a standardized SVG response envelope.
+ *
+ * @param string $svg The complete standalone SVG graphic layout markup string.
+ * @param int $code Target application or HTTP execution logic status marker (0 maps to 200).
+ *
+ * @return array{contentType: string, status: int, body: string} Configured SVG response descriptor.
+ */
+function buildSvgResponse(string $svg, int $code = 0): array
+{
+    return [
+        "contentType" => "image/svg+xml",
+        "status" => $code ?: 200,
+        "body" => $svg
+    ];
+}
+
+
+/**
+ * Wrap compressed binary stream data into a standardized PNG response envelope.
+ *
+ * @param string $png Binary raw stream payload blocks generated from the vector layout.
+ * @param int $code Target application or HTTP execution logic status marker (0 maps to 200).
+ * @return array{contentType: string, status: int, body: string} Configured PNG response descriptor.
+ */
+function buildPngResponse(string $png, int $code = 0): array
+{
+    return [
+        "contentType" => "image/png",
+        "status" => $code ?: 200,
+        "body" => $png
+    ];
+}
+
+
+/**
+ * Strategy handler to evaluate and package failed runtime operational execution vectors.
+ *
+ * Branches execution parameters according to the required client layout formatting types,
+ * managing safe static rendering conditions alongside explicit error code bindings.
+ *
+ * @param string $output The raw unvetted exception or operational validation failure message string.
+ * @param array<string,string> $params Request configuration parameters dictionary context.
+ * @param string $requestedType Target MIME strategy type specifier (json, png, or svg).
+ * @param int $errorCode Evaluated terminal status code representing the logical system failure type.
+ *
+ * @return array{contentType: string, status: int, body: string} Configured operational error payload envelope.
+ */
+function buildErrorResponse(string $output, array $params, string $requestedType, int $errorCode): array
+{
     if ($requestedType === "json") {
-        // generate array from output
-        $data = gettype($output) === "string" ? ["error" => $output, "code" => $errorCode] : $output;
-        return [
-            "contentType" => "application/json",
-            "body" => json_encode($data),
+        $data = [
+            "error" => $output,
+            "code" => $errorCode
         ];
+
+        return buildJsonResponse($data, $errorCode);
+    }
 
     if ($requestedType === "png") {
         $params["disable_animations"] = "true";
     }
 
-    $cardData = outputIsError($output)
-        ? generateErrorCard($output, $params)
-        : generateCard($output, $params)
-    ;
+    $cardData = generateErrorCard($output, $params);
 
-    $svg = $cardData["svg"];
-
-    // output PNG card
     if ($requestedType === "png") {
-        try {
-            $png = convertSvgToPng($svg, (int)$cardData["width"], (int)$cardData["height"]);
+        $png = convertSvgToPng((string)$cardData["svg"], (int)$cardData["width"], (int)$cardData["height"]);
 
-            return [
-                "contentType" => "image/png",
-                "body" => $png,
-            ];
-        }
-        catch (Exception $e) {
-            return [
-                "contentType" => "image/svg+xml",
-                "status" => 500,
-                "body" => generateErrorCard($e->getMessage(), $params),
-            ];
-        }
+        return buildPngResponse($png, $errorCode);
     }
 
-    // output SVG card
-    return [
-        "contentType" => "image/svg+xml",
-        "body" => $svg,
-    ];
+    return buildSvgResponse($cardData["svg"], $errorCode);
+}
+
+
+/**
+ * Strategy handler to evaluate and compile successful core operational data layers.
+ *
+ * Dispatches active data mappings directly into specialized layout factories, managing
+ * automated vector canvas dimension extraction blocks when static file exports are initiated.
+ *
+ * @param array $output Calculated repository metrics and core streak timelines dataset model.
+ * @param array<string,string> $params Request configuration parameters dictionary context.
+ * @param string $requestedType Target MIME strategy type specifier (json, png, or svg).
+ *
+ * @return array{contentType: string, status: int, body: string} Configured operational success payload envelope.
+ */
+function buildSuccessResponse(array $output, array $params, string $requestedType): array
+{
+    if ($requestedType === "json") {
+        return buildJsonResponse($output);
+    }
+
+    if ($requestedType === "png") {
+        $params["disable_animations"] = "true";
+    }
+
+    $cardData = generateCard($output, $params);
+
+    if ($requestedType === "png") {
+        $png = convertSvgToPng((string)$cardData["svg"], (int)$cardData["width"], (int)$cardData["height"]);
+
+        return buildPngResponse($png);
+    }
+
+    return buildSvgResponse($cardData["svg"]);
 }
 
 /**
- * Set headers and output response
+ * Factory to build a structured HTTP response dictionary based on requested format types.
  *
- * @param string|array $output The Content-Type header and the response body
- * @param int $responseCode The HTTP response code to send (stored for JSON consumers but always returns 200 for images)
- * @return void The function exits after sending the response
+ * @param string|array $output The stats data model array or a raw error string message.
+ * @param array<string,string>|null $params Request configuration parameters.
+ * @param int $errorCode Standard HTTP status code used strictly for JSON consumers.
+ *
+ * @return array{contentType: string, body: string, status: int} Evaluated response payload descriptor.
  */
-function renderOutput(string|array $output, int $responseCode = 200): void
+function buildResponse(string|array $output, ?array $params = null, int $errorCode = 200): array
 {
-    $response = generateOutput($output, null, $responseCode);
-    // Always return HTTP 200 for SVG/PNG so GitHub's image proxy (Camo) displays error cards
-    // instead of broken images. The original error code is included in JSON responses.
-    http_response_code(200);
-    header("Content-Type: {$response["contentType"]}");
-    exit($response["body"]);
+    $params = resolveParams($params);
+    $requestedType = $params["type"] ?? "svg";
+
+    try {
+        if (gettype($output) === "string") {
+            $errorCode = $errorCode === 200 || $errorCode === 0
+                ? 500
+                : $errorCode
+            ;
+
+            return buildErrorResponse($output, $params, $requestedType, $errorCode);
+        }
+
+        return buildSuccessResponse($output, $params, $requestedType);
+    }
+    catch (\Exception $e) {
+        try {
+            return buildErrorResponse($e->getMessage(), $params, $requestedType, $e->getCode() ?: 500);
+        }
+        catch (\Exception $e) {
+            $cardData = generateErrorCard($e->getMessage(), $params);
+
+            return buildSvgResponse($cardData["svg"], $e->getCode() ?: 500);
+        }
+    }
+}
+
+
+/**
+ * Flush content headers and output payload streams directly into the server network buffer.
+ *
+ * Authentically propagates HTTP status codes across all MIME types (including images and JSON),
+ * preventing downstream proxy asset networks (such as GitHub Camo CDN) from caching short-lived
+ * error cards, while forcing immediate updates once processing parameters stabilize.
+ *
+ * @param string|array $output Calculated repository metrics data model or a raw error string message.
+ * @param int $responseCode Target logic processing or validation evaluation status code.
+ * @return void Code halts sequence runtime execution immediately upon flushing the stream payload.
+ */
+function sendResponse(string|array $output, int $responseCode = 200): void
+{
+    try {
+        $response = buildResponse($output, null, $responseCode);
+
+        http_response_code($response["status"]);
+        header("Content-Type: {$response["contentType"]}");
+
+        exit($response["body"]);
+    }
+    catch (\Throwable $error) {
+        http_response_code(500);
+        header("Content-Type: text/plain; charset=utf-8");
+
+        echo "FATAL ERROR IN CODE:\n";
+        echo "Message: " . $error->getMessage() . "\n";
+        echo "File: " . $error->getFile() . "\n";
+        echo "Line: " . $error->getLine() . "\n";
+        echo "Trace:\n" . $error->getTraceAsString();
+
+        exit();
+    }
 }

@@ -79,7 +79,7 @@ try {
     }
 
     $stats = generateStreakStats($params["user"] ?? "", $params);
-    $response = generateOutput($stats, $params);
+    $response = buildResponse($stats, $params);
 
     $outputDir = dirname($outputPath);
     if ($outputDir !== "." && !is_dir($outputDir) && !mkdir($outputDir, 0755, true)) {

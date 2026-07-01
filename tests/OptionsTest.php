@@ -5,7 +5,9 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 // load functions
-require_once "api/card.php";
+require_once __DIR__ . "/../api/card.php";
+require_once __DIR__ . "/../api/utils.php";
+require_once __DIR__ . "/../api/theme-manager.php";
 
 final class OptionsTest extends TestCase
 {

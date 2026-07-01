@@ -5,7 +5,10 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 // load functions
-require_once "api/card.php";
+require_once __DIR__ . "/../api/card-generators/streak-card-generator.php";
+require_once __DIR__ . "/../api/card-generators/error-card-generator.php";
+require_once __DIR__ . "/../api/card.php";
+require_once __DIR__ . "/../api/utils.php";
 
 final class RenderTest extends TestCase
 {
@@ -149,7 +152,7 @@ final class RenderTest extends TestCase
     {
         $this->testParams["disable_animations"] = "true";
         // Check that the card is rendered as expected
-        $response = generateOutput($this->testStats, $this->testParams);
+        $response = buildResponse($this->testStats, $this->testParams);
         $render = $response["body"];
         $this->assertStringNotContainsString("opacity: 0;", $render);
         $this->assertStringContainsString("opacity: 1;", $render);
@@ -165,22 +168,22 @@ final class RenderTest extends TestCase
     {
         // "tranparent" gets converted to "#0000"
         $this->testParams["background"] = "transparent";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("fill='#000000' fill-opacity='0'", $render);
 
         // "#ff000080" gets converted to "#ff0000" and fill-opacity is set to 0.50196078431373
         $this->testParams["background"] = "ff000080";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("fill='#ff0000' fill-opacity='0.50196078431373'", $render);
 
         // "#ff0000" gets converted to "#ff0000" and fill-opacity is not set
         $this->testParams["background"] = "ff0000ff";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("fill='#ff0000' fill-opacity='1'", $render);
 
         // test stroke opacity
         $this->testParams["border"] = "00ff0080";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("stroke='#00ff00' stroke-opacity='0.50196078431373'", $render);
     }
 
@@ -190,7 +193,7 @@ final class RenderTest extends TestCase
     public function testGradientBackground(): void
     {
         $this->testParams["background"] = "45,f00,e11";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("fill='url(#gradient)'", $render);
         $this->assertStringContainsString(
             "<linearGradient id='gradient' gradientTransform='rotate(45)' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='#f00' /><stop offset='100%' stop-color='#e11' /></linearGradient>",
@@ -204,7 +207,7 @@ final class RenderTest extends TestCase
     public function testGradientBackgroundWithMoreThan2Colors(): void
     {
         $this->testParams["background"] = "-45,f00,4e5,ddd,fff";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("fill='url(#gradient)'", $render);
         $this->assertStringContainsString(
             "<linearGradient id='gradient' gradientTransform='rotate(-45)' gradientUnits='userSpaceOnUse'><stop offset='0%' stop-color='#f00' /><stop offset='33.333333333333%' stop-color='#4e5' /><stop offset='66.666666666667%' stop-color='#ddd' /><stop offset='100%' stop-color='#fff' /></linearGradient>",
@@ -218,7 +221,7 @@ final class RenderTest extends TestCase
     public function testExcludeDays(): void
     {
         $this->testStats["excludedDays"] = ["Sun", "Sat"];
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("* Excluding Sun, Sat", $render);
     }
 
@@ -228,7 +231,7 @@ final class RenderTest extends TestCase
     public function testCardWidth(): void
     {
         $this->testParams["card_width"] = "600";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("viewBox='0 0 600 195' width='600px' height='195px'", $render);
         $this->assertStringContainsString("<rect width='600' height='195' rx='4.5'/>", $render);
         $this->assertStringContainsString("<line x1='400' y1='28'", $render);
@@ -244,7 +247,7 @@ final class RenderTest extends TestCase
     public function testCardHeight(): void
     {
         $this->testParams["card_height"] = "300";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("viewBox='0 0 495 300' width='495px' height='300px'", $render);
         $this->assertStringContainsString("<rect width='495' height='300' rx='4.5'/>", $render);
         $this->assertStringContainsString("<line x1='165' y1='54.25'", $render);
@@ -260,7 +263,7 @@ final class RenderTest extends TestCase
     public function testFirstAndThirdColumnsSwappedWhenDirectionIsRtl(): void
     {
         $this->testParams["locale"] = "he";
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertMatchesRegularExpression(
             "/<!-- Total Contributions big number -->\\s*<g transform='translate\\(412\\.5, 48\\)'>/",
             $render,
@@ -278,7 +281,7 @@ final class RenderTest extends TestCase
     {
         $this->testParams["exclude_days"] = "Sun,Sat";
         $this->testStats["excludedDays"] = ["Sun", "Sat"];
-        $render = generateOutput($this->testStats, $this->testParams)["body"];
+        $render = buildResponse($this->testStats, $this->testParams)["body"];
         $this->assertStringContainsString("fill='#aaaaaa'", $render);
         $this->assertStringContainsString("* Excluding Sun, Sat", $render);
     }
