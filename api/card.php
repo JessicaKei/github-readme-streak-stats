@@ -233,24 +233,14 @@ function buildResponse(string|array $output, ?array $params = null, int $errorCo
  */
 function sendResponse(string|array $output, int $responseCode = 200): void
 {
-    try {
-        $response = buildResponse($output, null, $responseCode);
+    $response = buildResponse($output, null, $responseCode);
 
-        http_response_code($response["status"]);
-        header("Content-Type: {$response["contentType"]}");
-
-        exit($response["body"]);
+    if (ob_get_level() > 0) {
+        ob_end_clean();
     }
-    catch (\Throwable $error) {
-        http_response_code(500);
-        header("Content-Type: text/plain; charset=utf-8");
 
-        echo "FATAL ERROR IN CODE:\n";
-        echo "Message: " . $error->getMessage() . "\n";
-        echo "File: " . $error->getFile() . "\n";
-        echo "Line: " . $error->getLine() . "\n";
-        echo "Trace:\n" . $error->getTraceAsString();
+    http_response_code($response["status"]);
+    header("Content-Type: {$response["contentType"]}");
 
-        exit();
-    }
+    exit($response["body"]);
 }
