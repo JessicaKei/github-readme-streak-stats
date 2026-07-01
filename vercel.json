@@ -19,7 +19,10 @@
   ],
   "functions": {
     "api/**/*.php": {
-      "runtime": "vercel-php@0.6.1"
+      "runtime": "vercel-php@0.9.1"
     }
+  },
+  "env": {
+    "PHP_VERSION": "8.3"
   }
 }
