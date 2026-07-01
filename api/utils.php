@@ -255,3 +255,16 @@ function formatNumber(float $num, string $localeCode, bool $useShortNumbers): st
 
     return $prefix . $suffix;
 }
+
+
+/**
+ * Safely resolve parameter inputs, falling back to global request mappings.
+ *
+ * @param array<string,string>|null $params Provided request parameters dictionary.
+ *
+ * @return array<string,string> Valid non-null configuration array.
+ */
+function resolveParams(?array $params): array
+{
+    return $params ?? $_REQUEST;
+}

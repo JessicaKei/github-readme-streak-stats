@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/../utils.php";
 require_once __DIR__ . "/../theme-manager.php";
 
 
@@ -29,18 +30,6 @@ function getCardWidth(array $params, int $numColumns = 3): int
 function getCardHeight(array $params): int
 {
     return max(170, (int)($params["card_height"] ?? 195));
-}
-
-
-/**
- * Safely resolve parameter inputs, falling back to global request mappings.
- *
- * @param array<string,string>|null $params Provided request parameters dictionary.
- * @return array<string,string> Valid non-null configuration array.
- */
-function resolveParams(?array $params): array
-{
-    return $params ?? $_REQUEST;
 }
 
 
