@@ -25,6 +25,7 @@
     <style>
         a {
             fill: <?= $theme["dates"] ?>;
+            fill-opacity: <?= $theme["datesOpacity"] ?>;
         }
     </style>
 
@@ -32,7 +33,7 @@
         <clipPath id='outer_rectangle'>
             <rect width='<?= $cardWidth ?>' height='<?= $cardHeight ?>' rx='<?= $borderRadius ?>'/>
         </clipPath>
-        
+
         <?= $theme["backgroundGradient"] ?>
     </defs>
 
@@ -40,7 +41,9 @@
         <g style='isolation: isolate'>
             <rect
                 stroke='<?= $theme["border"] ?>'
+                stroke-opacity='<?= $theme["borderOpacity"] ?>'
                 fill='<?= $theme["background"] ?>'
+                fill-opacity='<?= str_starts_with((string)$theme["background"], "url(") ? "1" : $theme["backgroundOpacity"] ?>'
                 rx='<?= $borderRadius ?>'
                 x='0.5'
                 y='0.5'
@@ -59,6 +62,7 @@
                     stroke-width='0'
                     text-anchor='middle'
                     fill='<?= $theme["sideLabels"] ?>'
+                    fill-opacity='<?= $theme["sideLabelsOpacity"] ?>'
                     stroke='none'
                     font-family='"Segoe UI", Ubuntu, sans-serif'
                     font-weight='400'
@@ -81,6 +85,7 @@
             <g transform='translate(<?= $centerOffset ?>, <?= $heightOffset ?>)'>
                 <path
                     fill='<?= $theme["fire"] ?>'
+                    fill-opacity='<?= $theme["fireOpacity"] ?>'
                     d='
                         M0,35.8
                         c-25.2,0-45.7,20.5-45.7,45.7
@@ -100,6 +105,7 @@
                 />
                 <path
                     fill='<?= $theme["fire"] ?>'
+                    fill-opacity='<?= $theme["fireOpacity"] ?>'
                     d='
                         M4.8,93.8
                         c5.4,1.1,10.3,4.2,13.7,8.6
@@ -110,8 +116,8 @@
                         C-13.1,95.3-3.9,91.9,4.8,93.8z
                     '
                 />
-                <circle fill='<?= $theme["fire"] ?>' cx='-15' cy='71' r='4.9'/>
-                <circle fill='<?= $theme["fire"] ?>' cx='15' cy='71' r='4.9'/>
+                <circle fill='<?= $theme["fire"] ?>' fill-opacity='<?= $theme["fireOpacity"] ?>' cx='-15' cy='71' r='4.9'/>
+                <circle fill='<?= $theme["fire"] ?>' fill-opacity='<?= $theme["fireOpacity"] ?>' cx='15' cy='71' r='4.9'/>
             </g>
         </g>
     </g>
