@@ -33,15 +33,12 @@ function convertSvgToPng(string $svg, int $cardWidth, int $cardHeight): string
         throw new InvalidArgumentException("Failed to initialize system Inkscape process interface.", 500);
     }
 
-    // We directly inject raw SVG with all its line breaks into the Inkscape stream.
     fwrite($pipes[0], $svg);
     fclose($pipes[0]);
 
-    // Extract the finished binary PNG from the output stream.
     $png = stream_get_contents($pipes[1]);
     fclose($pipes[1]);
 
-    // Reading possible error logs
     $error = stream_get_contents($pipes[2]);
     fclose($pipes[2]);
 
@@ -51,7 +48,6 @@ function convertSvgToPng(string $svg, int $cardWidth, int $cardHeight): string
         throw new InvalidArgumentException("Failed to convert SVG to PNG via proc_open: {$error}", 500);
     }
 
-    // return the generated png
     return $png;
 }
 
@@ -82,21 +78,24 @@ function generateOutput(string|array $output, array $params = null, int $errorCo
         $params["disable_animations"] = "true";
     }
 
-    // generate SVG card
-    $svg = gettype($output) === "string" ? generateErrorCard($output, $params) : generateCard($output, $params);
+    $cardData = outputIsError($output)
+        ? generateErrorCard($output, $params)
+        : generateCard($output, $params)
+    ;
+
+    $svg = $cardData["svg"];
 
     // output PNG card
     if ($requestedType === "png") {
         try {
-            // extract width from SVG
-            $cardWidth = (int) preg_replace("/.*width=[\"'](\d+)px[\"'].*/", "$1", $svg);
-            $cardHeight = (int) preg_replace("/.*height=[\"'](\d+)px[\"'].*/", "$1", $svg);
-            $png = convertSvgToPng($svg, $cardWidth, $cardHeight);
+            $png = convertSvgToPng($svg, (int)$cardData["width"], (int)$cardData["height"]);
+
             return [
                 "contentType" => "image/png",
                 "body" => $png,
             ];
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             return [
                 "contentType" => "image/svg+xml",
                 "status" => 500,

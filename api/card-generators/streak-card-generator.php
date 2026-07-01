@@ -2,11 +2,8 @@
 
 declare(strict_types=1);
 
-// Mount core independent infrastructural tools
 require_once __DIR__ . "/../utils.php";
 require_once __DIR__ . "/../translation-manager.php";
-
-
 require_once __DIR__ . "/base-generator.php";
 
 
@@ -175,11 +172,11 @@ function getExcludingDaysText(array $excludedDays, array $localeTranslations, st
  * @param array<string,mixed> $stats Streak stats.
  * @param array<string,string>|NULL $params Request parameters.
  *
- * @return string The generated SVG Streak Stats card.
+ * @return array{svg: string, width: int, height: int} Packaged descriptor array containing raw SVG code and precise pixel dimensions.
  *
  * @throws InvalidArgumentException If a locale does not exist.
  */
-function generateCard(array $stats, ?array $params = null): string
+function generateCard(array $stats, ?array $params = null): array
 {
     $params = resolveParams($params);
 
@@ -289,5 +286,11 @@ function generateCard(array $stats, ?array $params = null): string
 
     include __DIR__ . "/../templates/streak-card.php";
 
-    return ob_get_clean();
+    $svg = (string)ob_get_clean();
+
+    return [
+        "svg"    => $svg,
+        "width"  => $cardWidth,
+        "height" => $cardHeight
+    ];
 }

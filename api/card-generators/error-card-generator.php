@@ -10,10 +10,10 @@ require_once __DIR__ . "/base-generator.php";
  *
  * @param string $message The error message text string to display on the card.
  * @param array<string,string>|null $params Request parameters from the URL query string.
- * 
- * @return string The generated standalone SVG markup string.
+ *
+ * @return array{svg: string, width: int, height: int} Packaged descriptor array containing raw SVG code and precise pixel dimensions.
  */
-function generateErrorCard(string $message, ?array $params = null): string
+function generateErrorCard(string $message, ?array $params = null): array
 {
     $commonData = getCommonCardData($params);
 
@@ -26,5 +26,11 @@ function generateErrorCard(string $message, ?array $params = null): string
 
     include __DIR__ . "/../templates/error-card.php";
 
-    return ob_get_clean();
+    $svg = (string)ob_get_clean();
+
+    return [
+        "svg"    => $svg,
+        "width"  => $cardWidth,
+        "height" => $cardHeight
+    ];
 }
